@@ -1,0 +1,89 @@
+{
+  "total_models": 8,
+  "metrics_evaluated": 7,
+  "best_performers": {
+    "accuracy": {
+      "model": "Random Forest",
+      "score": 0.67
+    },
+    "balanced_accuracy": {
+      "model": "Random Forest",
+      "score": 0.66996699669967
+    },
+    "precision": {
+      "model": "Random Forest",
+      "score": 0.67
+    },
+    "recall": {
+      "model": "Random Forest",
+      "score": 0.67
+    },
+    "f1_score": {
+      "model": "Random Forest",
+      "score": 0.67
+    },
+    "mcc": {
+      "model": "Random Forest",
+      "score": 0.33993399339933994
+    },
+    "auc_roc": {
+      "model": "Random Forest",
+      "score": 0.7098709870987098
+    }
+  },
+  "performance_ranges": {
+    "accuracy": {
+      "min": 0.0,
+      "max": 0.67,
+      "range": 0.67
+    },
+    "balanced_accuracy": {
+      "min": 0.0,
+      "max": 0.66996699669967,
+      "range": 0.66996699669967
+    },
+    "precision": {
+      "min": 0.0,
+      "max": 0.67,
+      "range": 0.67
+    },
+    "recall": {
+      "min": 0.0,
+      "max": 0.67,
+      "range": 0.67
+    },
+    "f1_score": {
+      "min": 0.0,
+      "max": 0.67,
+      "range": 0.67
+    },
+    "mcc": {
+      "min": -0.020102010201020103,
+      "max": 0.33993399339933994,
+      "range": 0.36003600360036003
+    },
+    "auc_roc": {
+      "min": 0.49579957995799573,
+      "max": 0.7098709870987098,
+      "range": 0.21407140714071404
+    }
+  },
+  "mean_performance": {
+    "accuracy": 0.48375000000000007,
+    "balanced_accuracy": 0.4846609660966097,
+    "precision": 0.4883967408207918,
+    "recall": 0.48375000000000007,
+    "f1_score": 0.47474184941670783,
+    "mcc": 0.09770022665791052,
+    "auc_roc": 0.593590609060906
+  },
+  "std_performance": {
+    "accuracy": 0.20239194648009098,
+    "balanced_accuracy": 0.20267121042362993,
+    "precision": 0.20405566517004362,
+    "recall": 0.20239194648009098,
+    "f1_score": 0.2002069466218045,
+    "mcc": 0.11119624253046262,
+    "auc_roc": 0.0757025924464966
+  }
+}

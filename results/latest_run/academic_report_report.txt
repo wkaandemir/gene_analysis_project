@@ -1,0 +1,99 @@
+
+Machine Learning Algorithms Comparison for Gene Expression Analysis
+===================================================================
+
+Author: Research Team
+Institution: Research Institution
+Date: 2025-07-30 17:42:09
+
+ABSTRACT
+--------
+This study presents a comprehensive comparison of machine learning algorithms
+for gene expression classification. Eight different models were evaluated
+using rigorous cross-validation and statistical testing methodologies.
+
+
+METHODOLOGY
+
+Dataset
+-------
+The gene expression dataset consists of 1000 samples 
+and 500 genes. The dataset includes 
+100 informative genes for classification 
+between disease and healthy conditions.
+
+Data Preprocessing
+------------------
+Data preprocessing included the following steps:
+1. Quality control filtering to remove low-expression and high-missing genes
+2. Normalization using robust
+3. Feature selection using mutual_info
+4. Final dataset dimensions: 600 × 47
+
+Machine Learning Models
+-----------------------
+Eight machine learning algorithms were evaluated:
+1. Random Forest
+2. Support Vector Machine
+3. Logistic Regression
+4. XGBoost
+5. Naive Bayes
+6. K-Nearest Neighbors
+7. Decision Tree
+8. Deep Neural Network
+
+Evaluation Methodology
+----------------------
+Model performance was evaluated using:
+- 5-fold stratified cross-validation
+- Multiple performance metrics: accuracy, precision, recall, F1-score, AUC-ROC, MCC
+- Statistical significance testing using Friedman test (α = 0.05)
+- Independent test set evaluation
+
+All experiments were conducted with random seed = 42 for reproducibility.
+
+
+
+RESULTS
+
+Performance Overview
+--------------------
+A total of 8 machine learning models were evaluated 
+on 7 performance metrics. 
+
+Best Performing Models:
+- Accuracy: Random Forest (0.670)
+- Balanced Accuracy: Random Forest (0.670)
+- Precision: Random Forest (0.670)
+- Recall: Random Forest (0.670)
+- F1 Score: Random Forest (0.670)
+- Mcc: Random Forest (0.340)
+- Auc Roc: Random Forest (0.710)
+
+Cross-Validation Results
+------------------------
+Cross-validation analysis revealed consistent performance patterns across models.
+The mean accuracy across all models was 0.484 
+± 0.202.
+
+Statistical Significance
+------------------------
+No statistically significant differences were found between models.
+
+Model Comparison
+----------------
+Detailed performance metrics are presented in Table 1. The results demonstrate
+the comparative effectiveness of different machine learning approaches for
+gene expression classification.
+
+
+CONCLUSIONS
+-----------
+This comparative analysis provides insights into the relative performance
+of different machine learning approaches for gene expression data analysis.
+The results contribute to the understanding of optimal methodologies for
+genomic classification tasks.
+
+TABLES AND FIGURES
+------------------
+Generated visualizations and detailed tables are available in the results directory.

@@ -1,0 +1,834 @@
+{
+  "friedman_accuracy": {
+    "statistic": 19.836144578313245,
+    "p_value": 0.005934696222974812,
+    "significant": true,
+    "interpretation": "Significant differences between models",
+    "models_compared": [
+      "Random Forest",
+      "Support Vector Machine",
+      "Logistic Regression",
+      "XGBoost",
+      "Naive Bayes",
+      "K-Nearest Neighbors",
+      "Decision Tree",
+      "Deep Neural Network"
+    ]
+  },
+  "ranking_accuracy": {
+    "model": {
+      "0": "Random Forest",
+      "1": "Support Vector Machine",
+      "2": "Logistic Regression",
+      "3": "XGBoost",
+      "4": "Naive Bayes",
+      "5": "K-Nearest Neighbors",
+      "6": "Decision Tree",
+      "7": "Deep Neural Network"
+    },
+    "avg_rank": {
+      "0": 3.0,
+      "1": 3.0,
+      "2": 3.0,
+      "3": 3.0,
+      "4": 3.0,
+      "5": 3.0,
+      "6": 3.0,
+      "7": 3.0
+    }
+  },
+  "friedman_precision_weighted": {
+    "statistic": 18.133333333333326,
+    "p_value": 0.01138269504294391,
+    "significant": true,
+    "interpretation": "Significant differences between models",
+    "models_compared": [
+      "Random Forest",
+      "Support Vector Machine",
+      "Logistic Regression",
+      "XGBoost",
+      "Naive Bayes",
+      "K-Nearest Neighbors",
+      "Decision Tree",
+      "Deep Neural Network"
+    ]
+  },
+  "ranking_precision_weighted": {
+    "model": {
+      "0": "Random Forest",
+      "1": "Support Vector Machine",
+      "2": "Logistic Regression",
+      "3": "XGBoost",
+      "4": "Naive Bayes",
+      "5": "K-Nearest Neighbors",
+      "6": "Decision Tree",
+      "7": "Deep Neural Network"
+    },
+    "avg_rank": {
+      "0": 3.0,
+      "1": 3.0,
+      "2": 3.0,
+      "3": 3.0,
+      "4": 3.0,
+      "5": 3.0,
+      "6": 3.0,
+      "7": 3.0
+    }
+  },
+  "friedman_recall_weighted": {
+    "statistic": 19.13559322033898,
+    "p_value": 0.007773025050786217,
+    "significant": true,
+    "interpretation": "Significant differences between models",
+    "models_compared": [
+      "Random Forest",
+      "Support Vector Machine",
+      "Logistic Regression",
+      "XGBoost",
+      "Naive Bayes",
+      "K-Nearest Neighbors",
+      "Decision Tree",
+      "Deep Neural Network"
+    ]
+  },
+  "ranking_recall_weighted": {
+    "model": {
+      "0": "Random Forest",
+      "1": "Support Vector Machine",
+      "2": "Logistic Regression",
+      "3": "XGBoost",
+      "4": "Naive Bayes",
+      "5": "K-Nearest Neighbors",
+      "6": "Decision Tree",
+      "7": "Deep Neural Network"
+    },
+    "avg_rank": {
+      "0": 3.0,
+      "1": 3.0,
+      "2": 3.0,
+      "3": 3.0,
+      "4": 3.0,
+      "5": 3.0,
+      "6": 3.0,
+      "7": 3.0
+    }
+  },
+  "friedman_f1_weighted": {
+    "statistic": 18.066666666666663,
+    "p_value": 0.01167280914647214,
+    "significant": true,
+    "interpretation": "Significant differences between models",
+    "models_compared": [
+      "Random Forest",
+      "Support Vector Machine",
+      "Logistic Regression",
+      "XGBoost",
+      "Naive Bayes",
+      "K-Nearest Neighbors",
+      "Decision Tree",
+      "Deep Neural Network"
+    ]
+  },
+  "ranking_f1_weighted": {
+    "model": {
+      "0": "Random Forest",
+      "1": "Support Vector Machine",
+      "2": "Logistic Regression",
+      "3": "XGBoost",
+      "4": "Naive Bayes",
+      "5": "K-Nearest Neighbors",
+      "6": "Decision Tree",
+      "7": "Deep Neural Network"
+    },
+    "avg_rank": {
+      "0": 3.0,
+      "1": 3.0,
+      "2": 3.0,
+      "3": 3.0,
+      "4": 3.0,
+      "5": 3.0,
+      "6": 3.0,
+      "7": 3.0
+    }
+  },
+  "pairwise_tests_accuracy": {
+    "Random Forest_vs_Support Vector Machine": {
+      "statistic": 1.6941306738730284,
+      "p_value": 0.16548949327674461,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Logistic Regression": {
+      "statistic": 2.092457497388747,
+      "p_value": 0.10453999977837539,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_XGBoost": {
+      "statistic": -2.911491058849143,
+      "p_value": 0.04361301985987857,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Random Forest_vs_Naive Bayes": {
+      "statistic": 2.2499999999999996,
+      "p_value": 0.08764517650339469,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_K-Nearest Neighbors": {
+      "statistic": 2.59051815545182,
+      "p_value": 0.0606507804518766,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Decision Tree": {
+      "statistic": 4.070403151799807,
+      "p_value": 0.015217904868620949,
+      "significant": true,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Deep Neural Network": {
+      "statistic": 1.3141051124990084,
+      "p_value": 0.2591034131610391,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Support Vector Machine_vs_Logistic Regression": {
+      "statistic": -1.756942520525371e-15,
+      "p_value": 0.9999999999999987,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Support Vector Machine_vs_XGBoost": {
+      "statistic": -3.147329533471379,
+      "p_value": 0.0346027690242024,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Support Vector Machine_vs_Naive Bayes": {
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_K-Nearest Neighbors": {
+      "statistic": 0.9534625892455939,
+      "p_value": 0.3943482833091275,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_Decision Tree": {
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Support Vector Machine_vs_Deep Neural Network": {
+      "statistic": -1.0391689970706626,
+      "p_value": 0.35741228312528156,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "Logistic Regression_vs_XGBoost": {
+      "statistic": -3.1099489967991185,
+      "p_value": 0.035873664316681035,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Logistic Regression_vs_Naive Bayes": {
+      "statistic": 1.078838791873315e-15,
+      "p_value": 0.9999999999999991,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_K-Nearest Neighbors": {
+      "statistic": 1.3801311186847123,
+      "p_value": 0.23966399608860534,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_Decision Tree": {
+      "statistic": 1.6852000649168182e-15,
+      "p_value": 0.9999999999999987,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Logistic Regression_vs_Deep Neural Network": {
+      "statistic": -1.7294942736181238,
+      "p_value": 0.1587764520917848,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "XGBoost_vs_Naive Bayes": {
+      "statistic": 3.4785691212713203,
+      "p_value": 0.025384978206682472,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_K-Nearest Neighbors": {
+      "statistic": 3.1453784511124696,
+      "p_value": 0.03466777983827617,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Decision Tree": {
+      "statistic": 4.790279606816765,
+      "p_value": 0.008709781167894571,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Deep Neural Network": {
+      "statistic": 3.1874999999999973,
+      "p_value": 0.0332956326675292,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Naive Bayes_vs_K-Nearest Neighbors": {
+      "statistic": 0.7669649888473712,
+      "p_value": 0.48586624427938085,
+      "significant": false,
+      "better_model": "Naive Bayes"
+    },
+    "Naive Bayes_vs_Decision Tree": {
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Naive Bayes_vs_Deep Neural Network": {
+      "statistic": -0.8156925466796076,
+      "p_value": 0.4604610717689969,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "K-Nearest Neighbors_vs_Decision Tree": {
+      "statistic": -0.8164965809277274,
+      "p_value": 0.4600507528439605,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "K-Nearest Neighbors_vs_Deep Neural Network": {
+      "statistic": -1.8533928172583778,
+      "p_value": 0.13744813149101084,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "Decision Tree_vs_Deep Neural Network": {
+      "statistic": -2.229481606852619,
+      "p_value": 0.08966251702034478,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    }
+  },
+  "pairwise_tests_precision_weighted": {
+    "Random Forest_vs_Support Vector Machine": {
+      "statistic": 1.0334703986362161,
+      "p_value": 0.3597706550415814,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Logistic Regression": {
+      "statistic": 2.030077496902401,
+      "p_value": 0.11220280454803737,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_XGBoost": {
+      "statistic": -2.9408816457889526,
+      "p_value": 0.042351927130047345,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Random Forest_vs_Naive Bayes": {
+      "statistic": 1.5720568986334555,
+      "p_value": 0.19103838389446962,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_K-Nearest Neighbors": {
+      "statistic": 2.564915569898924,
+      "p_value": 0.06231299854379069,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Decision Tree": {
+      "statistic": 3.8481838981269796,
+      "p_value": 0.018330981480304365,
+      "significant": true,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Deep Neural Network": {
+      "statistic": 1.3063989575407629,
+      "p_value": 0.26147028662108174,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Support Vector Machine_vs_Logistic Regression": {
+      "statistic": 0.885407709759908,
+      "p_value": 0.4259546282591297,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_XGBoost": {
+      "statistic": -2.579330365553092,
+      "p_value": 0.06137080055465995,
+      "significant": false,
+      "better_model": "XGBoost"
+    },
+    "Support Vector Machine_vs_Naive Bayes": {
+      "statistic": 0.3937803884357347,
+      "p_value": 0.7138325942227427,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_K-Nearest Neighbors": {
+      "statistic": 1.6046760990643834,
+      "p_value": 0.18383383827379624,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_Decision Tree": {
+      "statistic": 0.6517320006733867,
+      "p_value": 0.5501250559901638,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_Deep Neural Network": {
+      "statistic": 0.45662754471109646,
+      "p_value": 0.6716348530977388,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Logistic Regression_vs_XGBoost": {
+      "statistic": -3.1016882086931457,
+      "p_value": 0.03616187654636808,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Logistic Regression_vs_Naive Bayes": {
+      "statistic": -0.3466282272836707,
+      "p_value": 0.746337450494046,
+      "significant": false,
+      "better_model": "Naive Bayes"
+    },
+    "Logistic Regression_vs_K-Nearest Neighbors": {
+      "statistic": 1.4126420015410617,
+      "p_value": 0.23062776205306523,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_Decision Tree": {
+      "statistic": -0.0015962344932434931,
+      "p_value": 0.9988028247655589,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Logistic Regression_vs_Deep Neural Network": {
+      "statistic": -0.4563817333802099,
+      "p_value": 0.6717972289770655,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "XGBoost_vs_Naive Bayes": {
+      "statistic": 3.0009054288940002,
+      "p_value": 0.03990632456869021,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_K-Nearest Neighbors": {
+      "statistic": 3.142042703033555,
+      "p_value": 0.03477926139390488,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Decision Tree": {
+      "statistic": 4.704768720764281,
+      "p_value": 0.00927555794719137,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Deep Neural Network": {
+      "statistic": 2.7080216094265457,
+      "p_value": 0.05364696226762911,
+      "significant": false,
+      "better_model": "XGBoost"
+    },
+    "Naive Bayes_vs_K-Nearest Neighbors": {
+      "statistic": 1.0460916033097734,
+      "p_value": 0.3545657888531979,
+      "significant": false,
+      "better_model": "Naive Bayes"
+    },
+    "Naive Bayes_vs_Decision Tree": {
+      "statistic": 0.36706991699024416,
+      "p_value": 0.7321617377572005,
+      "significant": false,
+      "better_model": "Naive Bayes"
+    },
+    "Naive Bayes_vs_Deep Neural Network": {
+      "statistic": 0.06589510503550611,
+      "p_value": 0.9506233277320676,
+      "significant": false,
+      "better_model": "Naive Bayes"
+    },
+    "K-Nearest Neighbors_vs_Decision Tree": {
+      "statistic": -0.8341031246897177,
+      "p_value": 0.4511380164331285,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "K-Nearest Neighbors_vs_Deep Neural Network": {
+      "statistic": -1.4097533739190335,
+      "p_value": 0.2314167454799009,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "Decision Tree_vs_Deep Neural Network": {
+      "statistic": -0.26431901516769096,
+      "p_value": 0.8045941890224476,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    }
+  },
+  "pairwise_tests_recall_weighted": {
+    "Random Forest_vs_Support Vector Machine": {
+      "statistic": 1.6941306738730284,
+      "p_value": 0.16548949327674461,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Logistic Regression": {
+      "statistic": 2.092457497388747,
+      "p_value": 0.10453999977837539,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_XGBoost": {
+      "statistic": -2.911491058849143,
+      "p_value": 0.04361301985987857,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Random Forest_vs_Naive Bayes": {
+      "statistic": 2.2499999999999996,
+      "p_value": 0.08764517650339469,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_K-Nearest Neighbors": {
+      "statistic": 2.59051815545182,
+      "p_value": 0.0606507804518766,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Decision Tree": {
+      "statistic": 4.070403151799807,
+      "p_value": 0.015217904868620949,
+      "significant": true,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Deep Neural Network": {
+      "statistic": 1.1284363547413467,
+      "p_value": 0.32223291668284615,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Support Vector Machine_vs_Logistic Regression": {
+      "statistic": -1.756942520525371e-15,
+      "p_value": 0.9999999999999987,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Support Vector Machine_vs_XGBoost": {
+      "statistic": -3.147329533471379,
+      "p_value": 0.0346027690242024,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Support Vector Machine_vs_Naive Bayes": {
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_K-Nearest Neighbors": {
+      "statistic": 0.9534625892455939,
+      "p_value": 0.3943482833091275,
+      "significant": false,
+      "better_model": "Support Vector Machine"
+    },
+    "Support Vector Machine_vs_Decision Tree": {
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Support Vector Machine_vs_Deep Neural Network": {
+      "statistic": -1.9694638556693274,
+      "p_value": 0.12024334063356396,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "Logistic Regression_vs_XGBoost": {
+      "statistic": -3.1099489967991185,
+      "p_value": 0.035873664316681035,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Logistic Regression_vs_Naive Bayes": {
+      "statistic": 1.078838791873315e-15,
+      "p_value": 0.9999999999999991,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_K-Nearest Neighbors": {
+      "statistic": 1.3801311186847123,
+      "p_value": 0.23966399608860534,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_Decision Tree": {
+      "statistic": 1.6852000649168182e-15,
+      "p_value": 0.9999999999999987,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Logistic Regression_vs_Deep Neural Network": {
+      "statistic": -0.7184212081070992,
+      "p_value": 0.5122252586995419,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "XGBoost_vs_Naive Bayes": {
+      "statistic": 3.4785691212713203,
+      "p_value": 0.025384978206682472,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_K-Nearest Neighbors": {
+      "statistic": 3.1453784511124696,
+      "p_value": 0.03466777983827617,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Decision Tree": {
+      "statistic": 4.790279606816765,
+      "p_value": 0.008709781167894571,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Deep Neural Network": {
+      "statistic": 2.78782980889625,
+      "p_value": 0.04942145168743267,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Naive Bayes_vs_K-Nearest Neighbors": {
+      "statistic": 0.7669649888473712,
+      "p_value": 0.48586624427938085,
+      "significant": false,
+      "better_model": "Naive Bayes"
+    },
+    "Naive Bayes_vs_Decision Tree": {
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Naive Bayes_vs_Deep Neural Network": {
+      "statistic": -0.946099833582534,
+      "p_value": 0.3976695210842268,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "K-Nearest Neighbors_vs_Decision Tree": {
+      "statistic": -0.8164965809277274,
+      "p_value": 0.4600507528439605,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "K-Nearest Neighbors_vs_Deep Neural Network": {
+      "statistic": -1.3744863869781845,
+      "p_value": 0.24126827964366168,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "Decision Tree_vs_Deep Neural Network": {
+      "statistic": -0.6295115802917082,
+      "p_value": 0.5631797275114653,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    }
+  },
+  "pairwise_tests_f1_weighted": {
+    "Random Forest_vs_Support Vector Machine": {
+      "statistic": 2.4452781103981356,
+      "p_value": 0.0708044632289437,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Logistic Regression": {
+      "statistic": 2.079312183813802,
+      "p_value": 0.10610549561158246,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_XGBoost": {
+      "statistic": -2.9072199237865037,
+      "p_value": 0.043799907684731305,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Random Forest_vs_Naive Bayes": {
+      "statistic": 3.254550057590791,
+      "p_value": 0.031241136884849148,
+      "significant": true,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_K-Nearest Neighbors": {
+      "statistic": 2.588590082641146,
+      "p_value": 0.06077417271327164,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Decision Tree": {
+      "statistic": 4.051695383612979,
+      "p_value": 0.015454101170970081,
+      "significant": true,
+      "better_model": "Random Forest"
+    },
+    "Random Forest_vs_Deep Neural Network": {
+      "statistic": 1.9894827950328267,
+      "p_value": 0.11752012707496517,
+      "significant": false,
+      "better_model": "Random Forest"
+    },
+    "Support Vector Machine_vs_Logistic Regression": {
+      "statistic": -1.7030004956576208,
+      "p_value": 0.16377810499540527,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Support Vector Machine_vs_XGBoost": {
+      "statistic": -3.7662420453560697,
+      "p_value": 0.019668303918785095,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Support Vector Machine_vs_Naive Bayes": {
+      "statistic": -0.1830118767553341,
+      "p_value": 0.8636905092033124,
+      "significant": false,
+      "better_model": "Naive Bayes"
+    },
+    "Support Vector Machine_vs_K-Nearest Neighbors": {
+      "statistic": -0.3821623119475946,
+      "p_value": 0.7217774595082138,
+      "significant": false,
+      "better_model": "K-Nearest Neighbors"
+    },
+    "Support Vector Machine_vs_Decision Tree": {
+      "statistic": -1.1751373577376851,
+      "p_value": 0.30511554312814343,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Support Vector Machine_vs_Deep Neural Network": {
+      "statistic": -0.20816641998235128,
+      "p_value": 0.8452687941183128,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "Logistic Regression_vs_XGBoost": {
+      "statistic": -3.124761972792534,
+      "p_value": 0.035363582554783356,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Logistic Regression_vs_Naive Bayes": {
+      "statistic": 0.7398479056194281,
+      "p_value": 0.5004620173472103,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_K-Nearest Neighbors": {
+      "statistic": 1.3938113960281913,
+      "p_value": 0.23581959129471314,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_Decision Tree": {
+      "statistic": 0.1162596306405688,
+      "p_value": 0.9130499402983022,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "Logistic Regression_vs_Deep Neural Network": {
+      "statistic": 1.3013532709212607,
+      "p_value": 0.2630313736537192,
+      "significant": false,
+      "better_model": "Logistic Regression"
+    },
+    "XGBoost_vs_Naive Bayes": {
+      "statistic": 4.358638055317731,
+      "p_value": 0.012075012716711762,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_K-Nearest Neighbors": {
+      "statistic": 3.1892160345897356,
+      "p_value": 0.03324110111509487,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Decision Tree": {
+      "statistic": 4.912484711448309,
+      "p_value": 0.007972222492071628,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "XGBoost_vs_Deep Neural Network": {
+      "statistic": 2.8452410119228726,
+      "p_value": 0.04661965405664853,
+      "significant": true,
+      "better_model": "XGBoost"
+    },
+    "Naive Bayes_vs_K-Nearest Neighbors": {
+      "statistic": -0.0955036043495759,
+      "p_value": 0.9285080782992661,
+      "significant": false,
+      "better_model": "K-Nearest Neighbors"
+    },
+    "Naive Bayes_vs_Decision Tree": {
+      "statistic": -0.8643732411492449,
+      "p_value": 0.43613791172036287,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "Naive Bayes_vs_Deep Neural Network": {
+      "statistic": -0.014142754836023966,
+      "p_value": 0.9893933758495682,
+      "significant": false,
+      "better_model": "Deep Neural Network"
+    },
+    "K-Nearest Neighbors_vs_Decision Tree": {
+      "statistic": -0.7776400078291362,
+      "p_value": 0.4802100662560908,
+      "significant": false,
+      "better_model": "Decision Tree"
+    },
+    "K-Nearest Neighbors_vs_Deep Neural Network": {
+      "statistic": 0.0845956914324146,
+      "p_value": 0.9366476483189864,
+      "significant": false,
+      "better_model": "K-Nearest Neighbors"
+    },
+    "Decision Tree_vs_Deep Neural Network": {
+      "statistic": 0.7415167871609755,
+      "p_value": 0.49955432241850195,
+      "significant": false,
+      "better_model": "Decision Tree"
+    }
+  }
+}
