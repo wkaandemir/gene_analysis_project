@@ -1,199 +1,199 @@
-# Gene Expression Machine Learning Analysis Project
+# Gen İfadesi Makine Öğrenmesi Analiz Projesi
 
-A comprehensive machine learning research project for comparing multiple algorithms on gene expression data classification tasks.
+Gen ifadesi verilerinde sınıflandırma görevleri için birden fazla algoritmayı karşılaştıran kapsamlı bir makine öğrenmesi araştırma projesi.
 
-## 🎯 Project Overview
+## 🎯 Proje Genel Bakış
 
-This project implements a complete research pipeline for evaluating and comparing machine learning algorithms on gene expression data. It includes synthetic dataset generation, preprocessing, model training, comprehensive evaluation, statistical testing, academic-style visualizations, and automated research report generation.
+Bu proje, gen ifadesi verileri üzerinde makine öğrenmesi algoritmalarını değerlendirmek ve karşılaştırmak için eksiksiz bir araştırma işlem hattı uygular. Sentetik veri seti oluşturma, ön işleme, model eğitimi, kapsamlı değerlendirme, istatistiksel testler, akademik stil görselleştirmeler ve otomatik araştırma raporu oluşturma içerir.
 
-### Key Features
+### Ana Özellikler
 
-- **Synthetic Gene Expression Data Generation**: Creates realistic biological datasets with proper statistical characteristics
-- **8 Machine Learning Algorithms**: Random Forest, SVM, Logistic Regression, XGBoost, Naive Bayes, K-NN, Decision Tree, and Deep Neural Network
-- **Comprehensive Evaluation**: Multiple metrics, cross-validation, and statistical significance testing
-- **Academic Visualizations**: Publication-ready plots and figures
-- **Automated Reporting**: LaTeX tables and research papers
+- **Sentetik Gen İfadesi Veri Üretimi**: Uygun istatistiksel özelliklerle gerçekçi biyolojik veri setleri oluşturur
+- **8 Makine Öğrenmesi Algoritması**: Rastgele Orman, SVM, Lojistik Regresyon, XGBoost, Naive Bayes, K-NN, Karar Ağacı ve Derin Sinir Ağı
+- **Kapsamlı Değerlendirme**: Çoklu metrikler, çapraz doğrulama ve istatistiksel anlamlılık testleri
+- **Akademik Görselleştirmeler**: Yayına hazır grafikler ve şekiller
+- **Otomatik Raporlama**: LaTeX tabloları ve araştırma makaleleri
 
-## 📁 Project Structure
+## 📁 Proje Yapısı
 
 ```
 gene_analysis_project/
-├── data/                          # Generated datasets
-├── models/                        # Trained ML models
-│   └── ml_models.py              # ML model implementations
-├── results/                       # Analysis results (timestamped runs)
-├── utils/                         # Utility modules
-│   ├── data_generator.py         # Synthetic data generation
-│   ├── data_preprocessing.py     # Data preprocessing pipeline
-│   ├── evaluation.py             # Model evaluation framework
-│   ├── visualization.py          # Academic-style visualizations
-│   └── results_reporter.py       # Research report generation
-├── notebooks/                     # Jupyter notebooks (optional)
-├── main_analysis.py              # Main execution script
-├── requirements.txt              # Python dependencies
-└── README.md                     # This file
+├── data/                          # Oluşturulan veri setleri
+├── models/                        # Eğitilmiş ML modelleri
+│   └── ml_models.py              # ML model uygulamaları
+├── results/                       # Analiz sonuçları (zaman damgalı çalışmalar)
+├── utils/                         # Yardımcı modüller
+│   ├── data_generator.py         # Sentetik veri üretimi
+│   ├── data_preprocessing.py     # Veri ön işleme hattı
+│   ├── evaluation.py             # Model değerlendirme çerçevesi
+│   ├── visualization.py          # Akademik stil görselleştirmeler
+│   └── results_reporter.py       # Araştırma raporu oluşturma
+├── notebooks/                     # Jupyter not defterleri (isteğe bağlı)
+├── main_analysis.py              # Ana çalıştırma betiği
+├── requirements.txt              # Python bağımlılıkları
+└── README.md                     # Bu dosya
 ```
 
-## 🚀 Quick Start
+## 🚀 Hızlı Başlangıç
 
-### 1. Installation
+### 1. Kurulum
 
 ```bash
-# Clone or navigate to the project directory
+# Proje dizinine klonlayın veya gidin
 cd gene_analysis_project
 
-# Install required packages
+# Gerekli paketleri yükleyin
 pip install -r requirements.txt
 ```
 
-### 2. Run Complete Analysis
+### 2. Tam Analizi Çalıştırın
 
 ```bash
-# Execute the complete analysis pipeline
+# Tam analiz hattını çalıştırın
 python main_analysis.py
 ```
 
-This will:
-- Generate a synthetic gene expression dataset (1000 samples, 500 genes)
-- Preprocess the data with quality control and feature selection
-- Train 8 different machine learning models
-- Perform comprehensive evaluation with cross-validation
-- Generate academic-style visualizations
-- Create a detailed research report
+Bu işlem:
+- Sentetik gen ifadesi veri seti oluşturur (1000 örnek, 500 gen)
+- Kalite kontrolü ve özellik seçimi ile veriyi ön işler
+- 8 farklı makine öğrenmesi modelini eğitir
+- Çapraz doğrulama ile kapsamlı değerlendirme yapar
+- Akademik stil görselleştirmeler oluşturur
+- Detaylı araştırma raporu hazırlar
 
-### 3. View Results
+### 3. Sonuçları Görüntüleyin
 
-Results are saved in timestamped directories under `results/run_YYYYMMDD_HHMMSS/`:
+Sonuçlar `results/run_YYYYMMDD_HHMMSS/` altında zaman damgalı dizinlerde kaydedilir:
 
 ```
 results/
 └── run_20240130_143022/
-    ├── evaluation/               # Model evaluation results
-    ├── visualizations/           # Academic plots and figures
-    ├── trained_models/           # Saved ML models
-    └── academic_report.*         # Research report files
+    ├── evaluation/               # Model değerlendirme sonuçları
+    ├── visualizations/           # Akademik grafikler ve şekiller
+    ├── trained_models/           # Kaydedilmiş ML modelleri
+    └── academic_report.*         # Araştırma raporu dosyaları
 ```
 
-## 🔬 Research Methodology
+## 🔬 Araştırma Metodolojisi
 
-### Dataset Generation
-- **Samples**: 1,000 synthetic patients
-- **Genes**: 500 gene features (100 informative)
-- **Classes**: Binary classification (Disease vs. Healthy)
-- **Biological Realism**: Log-normal expression, batch effects, correlation structures
+### Veri Seti Üretimi
+- **Örnekler**: 1.000 sentetik hasta
+- **Genler**: 500 gen özelliği (100 bilgilendirici)
+- **Sınıflar**: İkili sınıflandırma (Hastalık vs. Sağlıklı)
+- **Biyolojik Gerçekçilik**: Log-normal ifade, toplu etkiler, korelasyon yapıları
 
-### Machine Learning Models
+### Makine Öğrenmesi Modelleri
 
-| Model | Type | Key Parameters |
-|-------|------|----------------|
-| Random Forest | Ensemble | 100 trees, max_depth=10 |
-| Support Vector Machine | Kernel-based | RBF kernel, C=1.0 |
-| Logistic Regression | Linear | L2 regularization |
-| XGBoost | Gradient Boosting | 100 estimators, lr=0.1 |
-| Naive Bayes | Probabilistic | Gaussian assumption |
-| K-Nearest Neighbors | Instance-based | k=5, distance weights |
-| Decision Tree | Tree-based | max_depth=10 |
-| Deep Neural Network | Deep Learning | 3 layers [128,64,32] |
+| Model | Tür | Ana Parametreler |
+|-------|-----|------------------|
+| Rastgele Orman | Topluluk | 100 ağaç, max_depth=10 |
+| Destek Vektör Makinesi | Çekirdek-tabanlı | RBF çekirdeği, C=1.0 |
+| Lojistik Regresyon | Doğrusal | L2 düzenlemesi |
+| XGBoost | Gradyan Artırma | 100 tahmin edici, lr=0.1 |
+| Naive Bayes | Olasılıksal | Gaussian varsayım |
+| K-En Yakın Komşu | Örnek-tabanlı | k=5, mesafe ağırlıkları |
+| Karar Ağacı | Ağaç-tabanlı | max_depth=10 |
+| Derin Sinir Ağı | Derin Öğrenme | 3 katman [128,64,32] |
 
-### Evaluation Metrics
-- **Accuracy**: Overall classification accuracy
-- **Precision**: Positive predictive value
-- **Recall**: Sensitivity/True positive rate
-- **F1-Score**: Harmonic mean of precision and recall
-- **AUC-ROC**: Area under receiver operating curve
-- **MCC**: Matthews correlation coefficient
+### Değerlendirme Metrikleri
+- **Doğruluk**: Genel sınıflandırma doğruluğu
+- **Kesinlik**: Pozitif tahmin değeri
+- **Duyarlılık**: Hassasiyet/Gerçek pozitif oranı
+- **F1-Skoru**: Kesinlik ve duyarlılığın harmonik ortalaması
+- **AUC-ROC**: ROC eğrisi altındaki alan
+- **MCC**: Matthews korelasyon katsayısı
 
-### Statistical Analysis
-- **5-fold Cross-Validation**: Stratified sampling
-- **Friedman Test**: Non-parametric significance testing
-- **Pairwise t-tests**: Model comparison
-- **Ranking Analysis**: Performance ordering
+### İstatistiksel Analiz
+- **5-kat Çapraz Doğrulama**: Tabakalı örnekleme
+- **Friedman Testi**: Parametrik olmayan anlamlılık testi
+- **İkili t-testleri**: Model karşılaştırması
+- **Sıralama Analizi**: Performans sıralaması
 
-## 📊 Generated Outputs
+## 📊 Oluşturulan Çıktılar
 
-### 1. Performance Tables
-- Comprehensive model comparison tables
-- Statistical significance indicators
-- Performance rankings
-- LaTeX-formatted tables for publications
+### 1. Performans Tabloları
+- Kapsamlı model karşılaştırma tabloları
+- İstatistiksel anlamlılık göstergeleri
+- Performans sıralamaları
+- Yayınlar için LaTeX formatında tablolar
 
-### 2. Visualizations
-- **Performance Comparison**: Bar charts with confidence intervals
-- **ROC Curves**: Model discrimination analysis
-- **Confusion Matrices**: Classification error analysis
-- **Ranking Heatmaps**: Performance across multiple metrics
-- **Cross-Validation Results**: Error bars and statistical significance
+### 2. Görselleştirmeler
+- **Performans Karşılaştırması**: Güven aralıklı çubuk grafikler
+- **ROC Eğrileri**: Model ayırt etme analizi
+- **Karışıklık Matrisleri**: Sınıflandırma hata analizi
+- **Sıralama Isı Haritaları**: Çoklu metrikler genelinde performans
+- **Çapraz Doğrulama Sonuçları**: Hata çubukları ve istatistiksel anlamlılık
 
-### 3. Research Report
-- **Methodology Section**: Complete experimental design
-- **Results Section**: Statistical findings and interpretations
-- **Discussion**: Model performance insights
-- **Tables and Figures**: Publication-ready materials
+### 3. Araştırma Raporu
+- **Metodoloji Bölümü**: Tam deneysel tasarım
+- **Sonuçlar Bölümü**: İstatistiksel bulgular ve yorumlar
+- **Tartışma**: Model performans öngörüleri
+- **Tablolar ve Şekiller**: Yayına hazır materyaller
 
-## 🔧 Customization
+## 🔧 Özelleştirme
 
-### Configuration Parameters
+### Yapılandırma Parametreleri
 
-You can customize the analysis by modifying the configuration in `main_analysis.py`:
+`main_analysis.py` dosyasındaki yapılandırmayı değiştirerek analizi özelleştirebilirsiniz:
 
 ```python
 custom_config = {
     'dataset': {
-        'n_samples': 1500,        # Number of samples
-        'n_genes': 750,           # Number of genes
-        'n_informative': 150      # Informative genes
+        'n_samples': 1500,        # Örnek sayısı
+        'n_genes': 750,           # Gen sayısı
+        'n_informative': 150      # Bilgilendirici genler
     },
     'preprocessing': {
         'normalization': 'robust',     # 'robust', 'standard', 'minmax'
         'feature_selection': 'mutual_info',  # 'mutual_info', 'f_test', 'rfe_rf'
-        'n_features': 120         # Features to select
+        'n_features': 120         # Seçilecek özellikler
     },
     'evaluation': {
-        'cv_folds': 10           # Cross-validation folds
+        'cv_folds': 10           # Çapraz doğrulama katları
     }
 }
 ```
 
-### Adding New Models
+### Yeni Model Ekleme
 
-To add a new machine learning model:
+Yeni bir makine öğrenmesi modeli eklemek için:
 
-1. Edit `models/ml_models.py`
-2. Add your model to the `initialize_models()` method
-3. Ensure it follows scikit-learn interface (`fit`, `predict`, `predict_proba`)
+1. `models/ml_models.py` dosyasını düzenleyin
+2. Modelinizi `initialize_models()` metoduna ekleyin
+3. Scikit-learn arayüzünü takip ettiğinden emin olun (`fit`, `predict`, `predict_proba`)
 
-Example:
+Örnek:
 ```python
-'My New Model': MyCustomClassifier(
+'Yeni Modelim': MyCustomClassifier(
     param1=value1,
     random_state=self.random_state
 )
 ```
 
-## 🧪 Advanced Usage
+## 🧪 Gelişmiş Kullanım
 
-### Individual Components
+### Bireysel Bileşenler
 
-You can use individual components separately:
+Bireysel bileşenleri ayrı ayrı kullanabilirsiniz:
 
 ```python
-# Generate data only
+# Sadece veri üretimi
 from utils.data_generator import GeneExpressionGenerator
 generator = GeneExpressionGenerator()
 dataset = generator.generate_complete_dataset()
 
-# Preprocess existing data
+# Mevcut veriyi ön işleme
 from utils.data_preprocessing import preprocess_gene_data
 processed = preprocess_gene_data('expression.csv', 'labels.csv')
 
-# Train specific models
+# Belirli modelleri eğitme
 from models.ml_models import GeneExpressionMLModels
 ml_models = GeneExpressionMLModels()
 ml_models.initialize_models()
 ml_models.train_model('Random Forest', X_train, y_train)
 ```
 
-### Custom Evaluation
+### Özel Değerlendirme
 
 ```python
 from utils.evaluation import ModelEvaluator
@@ -201,7 +201,7 @@ evaluator = ModelEvaluator()
 results = evaluator.evaluate_all_models(models_dict, X_test, y_test)
 ```
 
-### Visualization Only
+### Sadece Görselleştirme
 
 ```python
 from utils.visualization import create_academic_visualizations
@@ -209,9 +209,9 @@ figures = create_academic_visualizations(results_df, cv_results, models_dict,
                                         X_test, y_test, save_dir)
 ```
 
-## 📋 Requirements
+## 📋 Gereksinimler
 
-### Python Packages
+### Python Paketleri
 - numpy >= 1.24.3
 - pandas >= 2.0.3
 - scikit-learn >= 1.3.0
@@ -222,98 +222,98 @@ figures = create_academic_visualizations(results_df, cv_results, models_dict,
 - scipy >= 1.11.1
 - plotly >= 5.15.0
 
-### System Requirements
+### Sistem Gereksinimleri
 - Python 3.8+
-- 4GB+ RAM (for neural network training)
-- 2GB+ disk space (for results storage)
+- 4GB+ RAM (sinir ağı eğitimi için)
+- 2GB+ disk alanı (sonuç depolama için)
 
-## 🎓 Academic Use
+## 🎓 Akademik Kullanım
 
-This project is designed for:
-- **Research Papers**: Generates publication-ready materials
-- **Course Projects**: Complete ML pipeline demonstration
-- **Benchmarking**: Standardized evaluation framework
-- **Education**: Learn ML model comparison methodologies
+Bu proje şunlar için tasarlanmıştır:
+- **Araştırma Makaleleri**: Yayına hazır materyaller üretir
+- **Ders Projeleri**: Tam ML hattı gösterimi
+- **Kıyaslama**: Standartlaştırılmış değerlendirme çerçevesi
+- **Eğitim**: ML model karşılaştırma metodolojilerini öğrenme
 
-### Citation
-If you use this project in your research, please cite:
+### Atıf
+Bu projeyi araştırmanızda kullanırsanız, lütfen atıf yapın:
 
 ```
-Gene Expression Machine Learning Analysis Framework
-Available at: [Your Repository URL]
+Gen İfadesi Makine Öğrenmesi Analiz Çerçevesi
+Erişilebilir: [Repository URL'niz]
 ```
 
-## 🔍 Troubleshooting
+## 🔍 Sorun Giderme
 
-### Common Issues
+### Yaygın Sorunlar
 
-1. **Memory Error during Neural Network Training**
-   - Reduce batch size in `DeepNeuralNetworkClassifier`
-   - Decrease dataset size in configuration
+1. **Sinir Ağı Eğitimi Sırasında Bellek Hatası**
+   - `DeepNeuralNetworkClassifier`'da toplu iş boyutunu küçültün
+   - Yapılandırmada veri seti boyutunu azaltın
 
-2. **Missing Dependencies**
+2. **Eksik Bağımlılıklar**
    ```bash
    pip install --upgrade -r requirements.txt
    ```
 
-3. **Slow Execution**
-   - Reduce cross-validation folds
-   - Use fewer samples/features
-   - Disable neural network training
+3. **Yavaş Çalışma**
+   - Çapraz doğrulama katlarını azaltın
+   - Daha az örnek/özellik kullanın
+   - Sinir ağı eğitimini devre dışı bırakın
 
-4. **Visualization Errors**
-   - Install additional backends: `pip install kaleido`
-   - Check matplotlib backend: `matplotlib.use('Agg')`
+4. **Görselleştirme Hataları**
+   - Ek arka uçları yükleyin: `pip install kaleido`
+   - Matplotlib arka ucunu kontrol edin: `matplotlib.use('Agg')`
 
-### Performance Optimization
+### Performans Optimizasyonu
 
-- **Parallel Processing**: Models use `n_jobs=-1` where available
-- **Memory Management**: Data is processed in chunks
-- **GPU Acceleration**: Neural networks will use GPU if available
+- **Paralel İşleme**: Modeller mevcut olduğunda `n_jobs=-1` kullanır
+- **Bellek Yönetimi**: Veriler parçalar halinde işlenir
+- **GPU Hızlandırması**: Sinir ağları varsa GPU kullanır
 
-## 📈 Expected Results
+## 📈 Beklenen Sonuçlar
 
-### Typical Performance Rankings
-1. **Random Forest**: Generally performs well on gene expression data
-2. **XGBoost**: Strong gradient boosting performance
-3. **SVM**: Good with proper feature selection
-4. **Deep Neural Network**: May overfit with small datasets
-5. **Logistic Regression**: Simple but effective baseline
+### Tipik Performans Sıralaması
+1. **Rastgele Orman**: Gen ifadesi verilerinde genellikle iyi performans gösterir
+2. **XGBoost**: Güçlü gradyan artırma performansı
+3. **SVM**: Uygun özellik seçimi ile iyi
+4. **Derin Sinir Ağı**: Küçük veri setlerinde aşırı öğrenebilir
+5. **Lojistik Regresyon**: Basit ama etkili temel seviye
 
-### Statistical Significance
-- Friedman test typically shows significant differences (p < 0.05)
-- Random Forest and XGBoost often rank highest
-- Neural networks may vary based on dataset size
+### İstatistiksel Anlamlılık
+- Friedman testi tipik olarak anlamlı farklar gösterir (p < 0.05)
+- Rastgele Orman ve XGBoost genellikle en yüksek sıralarda
+- Sinir ağları veri seti boyutuna göre değişebilir
 
-## 🤝 Contributing
+## 🤝 Katkıda Bulunma
 
-To contribute to this project:
+Bu projeye katkıda bulunmak için:
 
-1. Fork the repository
-2. Create a feature branch
-3. Add your improvements
-4. Ensure all tests pass
-5. Submit a pull request
+1. Repository'yi fork edin
+2. Özellik dalı oluşturun
+3. İyileştirmelerinizi ekleyin
+4. Tüm testlerin geçtiğinden emin olun
+5. Pull request gönderin
 
-### Development Guidelines
-- Follow PEP 8 coding standards
-- Add docstrings to all functions
-- Include unit tests for new features
-- Update documentation as needed
+### Geliştirme Yönergeleri
+- PEP 8 kodlama standartlarını takip edin
+- Tüm fonksiyonlara docstring'ler ekleyin
+- Yeni özellikler için birim testleri dahil edin
+- Belgeleri gerektiği gibi güncelleyin
 
-## 📄 License
+## 📄 Lisans
 
-This project is released under the MIT License. See LICENSE file for details.
+Bu proje MIT Lisansı altında yayınlanmıştır. Detaylar için LICENSE dosyasına bakın.
 
-## 🆘 Support
+## 🆘 Destek
 
-For questions and support:
-- Create an issue in the repository
-- Check the troubleshooting section
-- Review the example notebooks
+Sorular ve destek için:
+- Repository'de issue oluşturun
+- Sorun giderme bölümünü kontrol edin
+- Örnek not defterlerini inceleyin
 
 ---
 
-**Happy Researching! 🧬🔬**
+**İyi Araştırmalar! 🧬🔬**
 
-*This project demonstrates best practices in machine learning research methodology, providing a template for rigorous algorithmic comparison studies in bioinformatics.*
+*Bu proje, makine öğrenmesi araştırma metodolojisinde en iyi uygulamaları göstererek, biyoinformatikte titiz algoritmik karşılaştırma çalışmaları için bir şablon sağlar.*

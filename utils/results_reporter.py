@@ -1,9 +1,9 @@
 """
-Academic Results Reporting System for Gene Expression ML Analysis
-=================================================================
+Gen İfadesi Makine Öğrenmesi Analizi için Akademik Sonuç Raporlama Sistemi
+=======================================================================
 
-This module generates comprehensive academic-style reports with statistical
-analysis, formatted tables, and research findings for publication.
+Bu modül, yayın için istatistiksel analiz, biçimlendirilmiş tablolar ve
+araştırma bulguları ile kapsamlı akademik tarz raporlar üretir.
 """
 
 import numpy as np
@@ -17,29 +17,29 @@ warnings.filterwarnings('ignore')
 
 class AcademicReporter:
     """
-    Academic results reporting system for ML model comparison research.
+    Makine öğrenmesi model karşılaştırma araştırması için akademik sonuç raporlama sistemi.
     
-    Features:
-    - Publication-ready tables
-    - Statistical significance reporting
-    - Methodology documentation
-    - Research findings summary
-    - Latex table generation
+    Özellikler:
+    - Yayına hazır tablolar
+    - İstatistiksel anlamlılık raporlaması
+    - Metodoloji belgeleri
+    - Araştırma bulguları özeti
+    - Latex tablo üretimi
     """
     
-    def __init__(self, project_name="Gene Expression ML Analysis", 
-                 author="Research Team", institution="Research Institution"):
+    def __init__(self, project_name="Gen İfadesi Makine Öğrenmesi Analizi", 
+                 author="Araştırma Ekibi", institution="Araştırma Kurumu"):
         """
-        Initialize the academic reporter.
+        Akademik raporlayıcıyı başlat.
         
-        Parameters:
+        Parametreler:
         -----------
         project_name : str
-            Name of the research project
+            Araştırma projesinin adı
         author : str
-            Author name(s)
+            Yazar adı(ları)
         institution : str
-            Institution name
+            Kurum adı
         """
         self.project_name = project_name
         self.author = author
@@ -49,46 +49,46 @@ class AcademicReporter:
     def create_performance_table(self, results_df, format_style='academic',
                                precision=3, include_ranking=True):
         """
-        Create a formatted performance comparison table.
+        Biçimlendirilmiş performans karşılaştırma tablosu oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         results_df : pandas.DataFrame
-            Results dataframe with models and metrics
+            Modeller ve metriklerle sonuç dataframe'i
         format_style : str, default='academic'
-            Table formatting style
+            Tablo biçimlendirme stili
         precision : int, default=3
-            Decimal precision for numbers
+            Sayılar için ondalık hassasiyet
         include_ranking : bool, default=True
-            Whether to include model rankings
+            Model sıralamalarının dahil edilip edilmeyeceği
             
-        Returns:
+        Döndürür:
         --------
         formatted_table : pandas.DataFrame
-            Formatted table ready for publication
+            Yayına hazır biçimlendirilmiş tablo
         """
-        # Select relevant metrics
+        # İlgili metrikleri seç
         metrics_order = ['accuracy', 'balanced_accuracy', 'precision', 'recall', 
                         'f1_score', 'auc_roc', 'mcc']
         available_metrics = [m for m in metrics_order if m in results_df.columns]
         
-        # Create clean table
+        # Temiz tablo oluştur
         table = results_df[available_metrics].copy()
         
-        # Format numbers
+        # Sayıları biçimlendir
         for col in table.columns:
-            # Convert to numeric and handle any non-numeric values
+            # Sayısal değere dönüştür ve sayısal olmayan değerleri işle
             table[col] = pd.to_numeric(table[col], errors='coerce')
             table[col] = table[col].round(precision)
         
-        # Add rankings if requested
+        # İstenirse sıraları ekle
         if include_ranking:
             ranking_cols = {}
             for metric in available_metrics:
                 ranks = table[metric].rank(ascending=False, method='min').astype(int)
                 ranking_cols[f'{metric}_rank'] = ranks
             
-            # Interleave ranks with scores
+            # Sıraları puanlarla ara ekle
             formatted_table = pd.DataFrame(index=table.index)
             for metric in available_metrics:
                 formatted_table[metric] = table[metric].map(f'{{:.{precision}f}}'.format)
@@ -97,7 +97,7 @@ class AcademicReporter:
         else:
             formatted_table = table.round(precision)
         
-        # Rename columns for publication
+        # Yayın için sütunları yeniden adlandır
         column_mapping = {
             'accuracy': 'Accuracy',
             'balanced_accuracy': 'Balanced Accuracy',
@@ -121,11 +121,11 @@ class AcademicReporter:
         
         formatted_table.columns = final_columns
         
-        # Sort by best overall performance (average rank)
+        # En iyi genel performansa göre sırala (ortalama sıra)
         if include_ranking:
             rank_cols = [col for col in formatted_table.columns if '(Rank)' in col]
             if rank_cols:
-                # Calculate average rank for sorting
+                # Sıralama için ortalama sıra hesapla
                 rank_values = pd.DataFrame(index=formatted_table.index)
                 for col in rank_cols:
                     rank_values[col] = formatted_table[col].str.extract(r'\((\d+)\)')[0].astype(float)
@@ -137,19 +137,19 @@ class AcademicReporter:
     
     def create_cross_validation_table(self, cv_results, precision=3):
         """
-        Create a formatted cross-validation results table.
+        Biçimlendirilmiş çapraz doğrulama sonuçları tablosu oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         cv_results : dict
-            Cross-validation results
+            Çapraz doğrulama sonuçları
         precision : int, default=3
-            Decimal precision
+            Ondalık hassasiyet
             
-        Returns:
+        Döndürür:
         --------
         cv_table : pandas.DataFrame
-            Formatted CV results table
+            Biçimlendirilmiş çapraz doğrulama sonuçları tablosu
         """
         metrics = ['accuracy', 'precision_weighted', 'recall_weighted', 'f1_weighted']
         
@@ -167,7 +167,7 @@ class AcademicReporter:
         
         cv_table = pd.DataFrame(table_data).set_index('Model')
         
-        # Rename columns
+        # Sütunları yeniden adlandır
         column_mapping = {
             'accuracy': 'Accuracy',
             'precision_weighted': 'Precision',
@@ -181,33 +181,33 @@ class AcademicReporter:
     
     def create_statistical_significance_table(self, statistical_tests, alpha=0.05):
         """
-        Create a table summarizing statistical significance tests.
+        İstatistiksel anlamlılık testlerini özetleyen bir tablo oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         statistical_tests : dict
-            Results from statistical tests
+            İstatistiksel testlerden sonuçlar
         alpha : float, default=0.05
-            Significance level
+            Anlamlılık seviyesi
             
-        Returns:
+        Döndürür:
         --------
         stats_table : pandas.DataFrame
-            Statistical significance summary table
+            İstatistiksel anlamlılık özet tablosu
         """
         table_data = []
         
-        # Friedman test results
+        # Friedman test sonuçları
         for key, result in statistical_tests.items():
             if key.startswith('friedman_'):
                 metric = key.replace('friedman_', '').replace('_', ' ').title()
                 
                 row = {
-                    'Test': 'Friedman Test',
+                    'Test': 'Friedman Testi',
                     'Metric': metric,
                     'Statistic': f"{result['statistic']:.3f}",
                     'P-value': f"{result['p_value']:.3f}" if result['p_value'] >= 0.001 else "< 0.001",
-                    'Significant': "Yes" if result['significant'] else "No",
+                    'Significant': "Evet" if result['significant'] else "Hayır",
                     'Interpretation': result['interpretation']
                 }
                 table_data.append(row)
@@ -215,7 +215,7 @@ class AcademicReporter:
         if table_data:
             stats_table = pd.DataFrame(table_data)
         else:
-            # Create empty table with proper structure
+            # Doğru yapıya sahip boş tablo oluştur
             stats_table = pd.DataFrame(columns=['Test', 'Metric', 'Statistic', 
                                               'P-value', 'Significant', 'Interpretation'])
         
@@ -223,17 +223,17 @@ class AcademicReporter:
     
     def generate_model_summary_statistics(self, results_df):
         """
-        Generate summary statistics across all models.
+        Tüm modeller genelinde özet istatistikler üret.
         
-        Parameters:
+        Parametreler:
         -----------
         results_df : pandas.DataFrame
-            Results dataframe
+            Sonuçlar dataframe'i
             
-        Returns:
+        Döndürür:
         --------
         summary_stats : dict
-            Summary statistics
+            Özet istatistikler
         """
         metrics = [col for col in results_df.columns if col != 'model_name']
         
@@ -250,12 +250,12 @@ class AcademicReporter:
             if results_df[metric].notna().any():
                 values = results_df[metric].dropna()
                 
-                # Convert to numeric if needed
+                # Gerekirse sayısal değere dönüştür
                 if values.dtype == 'object':
                     values = pd.to_numeric(values, errors='coerce').dropna()
                 
                 if len(values) > 0:
-                    # Best performer
+                    # En iyi performans gösteren
                     best_idx = values.idxmax()
                     best_model = results_df.index[best_idx] if isinstance(best_idx, int) else best_idx
                     summary_stats['best_performers'][metric] = {
@@ -263,7 +263,7 @@ class AcademicReporter:
                         'score': values.max()
                     }
                 
-                    # Performance statistics
+                    # Performans istatistikleri
                     summary_stats['performance_ranges'][metric] = {
                         'min': values.min(),
                         'max': values.max(),
@@ -278,60 +278,60 @@ class AcademicReporter:
     def generate_methodology_section(self, dataset_info, preprocessing_info, 
                                    models_info, evaluation_info):
         """
-        Generate methodology section for research paper.
+        Araştırma makalesi için metodoloji bölümü üret.
         
-        Parameters:
+        Parametreler:
         -----------
         dataset_info : dict
-            Dataset information
+            Veri seti bilgileri
         preprocessing_info : dict
-            Preprocessing pipeline information
+            Ön işleme hattı bilgileri
         models_info : dict
-            Machine learning models information
+            Makine öğrenmesi modelleri bilgileri
         evaluation_info : dict
-            Evaluation methodology information
+            Değerlendirme metodolojisi bilgileri
             
-        Returns:
+        Döndürür:
         --------
         methodology : str
-            Formatted methodology section
+            Biçimlendirilmiş metodoloji bölümü
         """
         methodology = f"""
-METHODOLOGY
+METODOLOJİ
 
-Dataset
--------
-The gene expression dataset consists of {dataset_info.get('n_samples', 'N/A')} samples 
-and {dataset_info.get('n_genes', 'N/A')} genes. The dataset includes 
-{dataset_info.get('n_informative', 'N/A')} informative genes for classification 
-between disease and healthy conditions.
+Veri Seti
+---------
+Gen ifadesi veri seti {dataset_info.get('n_samples', 'N/A')} örnek 
+ve {dataset_info.get('n_genes', 'N/A')} gen içermektedir. Veri seti, 
+hastalık ve sağlıklı durumlar arasında sınıflandırma için 
+{dataset_info.get('n_informative', 'N/A')} bilgilendirici gen içermektedir.
 
-Data Preprocessing
-------------------
-Data preprocessing included the following steps:
-1. Quality control filtering to remove low-expression and high-missing genes
-2. Normalization using {preprocessing_info.get('normalization_method', 'robust scaling')}
-3. Feature selection using {preprocessing_info.get('feature_selection_method', 'mutual information')}
-4. Final dataset dimensions: {preprocessing_info.get('final_dimensions', 'N/A')}
+Veri Ön İşleme
+---------------
+Veri ön işleme aşağıdaki adımları içermiştir:
+1. Düşük ifadeli ve yüksek eksik genleri kaldırmak için kalite kontrol filtrelemesi
+2. {preprocessing_info.get('normalization_method', 'robust scaling')} kullanarak normalizasyon
+3. {preprocessing_info.get('feature_selection_method', 'mutual information')} kullanarak özellik seçimi
+4. Son veri seti boyutları: {preprocessing_info.get('final_dimensions', 'N/A')}
 
-Machine Learning Models
------------------------
-Eight machine learning algorithms were evaluated:
+Makine Öğrenmesi Modelleri
+----------------------------
+Sekiz makine öğrenmesi algoritması değerlendirilmiştir:
 """
         
         for i, (model_name, model_info) in enumerate(models_info.items(), 1):
             methodology += f"{i}. {model_name}\n"
         
         methodology += f"""
-Evaluation Methodology
-----------------------
-Model performance was evaluated using:
-- {evaluation_info.get('cv_folds', 5)}-fold stratified cross-validation
-- Multiple performance metrics: accuracy, precision, recall, F1-score, AUC-ROC, MCC
-- Statistical significance testing using Friedman test (α = 0.05)
-- Independent test set evaluation
+Değerlendirme Metodolojisi
+--------------------------
+Model performansı aşağıdakiler kullanılarak değerlendirilmiştir:
+- {evaluation_info.get('cv_folds', 5)} katlı tabakalı çapraz doğrulama
+- Çoklu performans metrikleri: doğruluk, kesinlik, duyarlılık, F1-skoru, AUC-ROC, MCC
+- Friedman testi kullanarak istatistiksel anlamlılık testi (α = 0.05)
+- Bağımsız test kümesi değerlendirmesi
 
-All experiments were conducted with random seed = 42 for reproducibility.
+Tüm deneyler tekrarlanabilirlik için rastgele tohum = 42 ile gerçekleştirilmiştir.
 """
         
         return methodology
@@ -339,50 +339,50 @@ All experiments were conducted with random seed = 42 for reproducibility.
     def generate_results_section(self, results_df, cv_results, statistical_tests, 
                                summary_stats):
         """
-        Generate results section for research paper.
+        Araştırma makalesi için sonuçlar bölümü üret.
         
-        Parameters:
+        Parametreler:
         -----------
         results_df : pandas.DataFrame
-            Test set results
+            Test kümesi sonuçları
         cv_results : dict
-            Cross-validation results
+            Çapraz doğrulama sonuçları
         statistical_tests : dict
-            Statistical test results
+            İstatistiksel test sonuçları
         summary_stats : dict
-            Summary statistics
+            Özet istatistikler
             
-        Returns:
+        Döndürür:
         --------
         results_section : str
-            Formatted results section
+            Biçimlendirilmiş sonuçlar bölümü
         """
         results_section = f"""
-RESULTS
+SONUÇLAR
 
-Performance Overview
---------------------
-A total of {summary_stats['total_models']} machine learning models were evaluated 
-on {summary_stats['metrics_evaluated']} performance metrics. 
+Performans Genel Bakışı
+---------------------
+Toplam {summary_stats['total_models']} makine öğrenmesi modeli 
+{summary_stats['metrics_evaluated']} performans metriği üzerinde değerlendirilmiştir. 
 
-Best Performing Models:
+En İyi Performans Gösteren Modeller:
 """
         
         for metric, info in summary_stats['best_performers'].items():
             results_section += f"- {metric.replace('_', ' ').title()}: {info['model']} ({info['score']:.3f})\n"
         
         results_section += f"""
-Cross-Validation Results
-------------------------
-Cross-validation analysis revealed consistent performance patterns across models.
-The mean accuracy across all models was {summary_stats['mean_performance'].get('accuracy', 0):.3f} 
-± {summary_stats['std_performance'].get('accuracy', 0):.3f}.
+Çapraz Doğrulama Sonuçları
+--------------------------
+Çapraz doğrulama analizi, modeller arasında tutarlı performans örüntüleri ortaya çıkarmıştır.
+Tüm modeller genelinde ortalama doğruluk {summary_stats['mean_performance'].get('accuracy', 0):.3f} 
+± {summary_stats['std_performance'].get('accuracy', 0):.3f} olmuştur.
 
-Statistical Significance
-------------------------
+İstatistiksel Anlamlılık
+-----------------------
 """
         
-        # Add statistical test results
+        # İstatistiksel test sonuçlarını ekle
         significant_tests = []
         for key, result in statistical_tests.items():
             if key.startswith('friedman_') and result.get('significant', False):
@@ -390,16 +390,16 @@ Statistical Significance
                 significant_tests.append(f"{metric} (p = {result['p_value']:.3f})")
         
         if significant_tests:
-            results_section += f"Significant differences were found for: {', '.join(significant_tests)}\n"
+            results_section += f"Anlamlı farklılıklar şunlar için bulunmuştur: {', '.join(significant_tests)}\n"
         else:
-            results_section += "No statistically significant differences were found between models.\n"
+            results_section += "Modeller arasında istatistiksel olarak anlamlı farklılık bulunmamıştır.\n"
         
         results_section += """
-Model Comparison
-----------------
-Detailed performance metrics are presented in Table 1. The results demonstrate
-the comparative effectiveness of different machine learning approaches for
-gene expression classification.
+Model Karşılaştırması
+-------------------
+Ayrıntılı performans metrikleri Tablo 1'de sunulmuştur. Sonuçlar,
+gen ifadesi sınıflandırması için farklı makine öğrenmesi yaklaşımlarının
+karşılaştırmalı etkinliğini göstermektedir.
 """
         
         return results_section
@@ -407,23 +407,23 @@ gene expression classification.
     def generate_latex_table(self, df, caption="Model Performance Comparison", 
                            label="tab:performance"):
         """
-        Generate LaTeX table code for publication.
+        Yayın için LaTeX tablo kodu üret.
         
-        Parameters:
+        Parametreler:
         -----------
         df : pandas.DataFrame
-            Table to convert
+            Dönüştürülecek tablo
         caption : str
-            Table caption
+            Tablo başlığı
         label : str
-            Table label for referencing
+            Referans verme için tablo etiketi
             
-        Returns:
+        Döndürür:
         --------
         latex_code : str
-            LaTeX table code
+            LaTeX tablo kodu
         """
-        # Basic LaTeX table generation
+        # Temel LaTeX tablo üretimi
         n_cols = len(df.columns) + 1  # +1 for index
         col_spec = 'l' + 'c' * (n_cols - 1)
         
@@ -453,43 +453,43 @@ Model & {' & '.join(df.columns)} \\\\
                                   dataset_info, preprocessing_info, models_info,
                                   save_path):
         """
-        Create a comprehensive academic report.
+        Kapsamlı akademik rapor oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         results_df : pandas.DataFrame
-            Test results
+            Test sonuçları
         cv_results : dict
-            Cross-validation results
+            Çapraz doğrulama sonuçları
         statistical_tests : dict
-            Statistical test results
+            İstatistiksel test sonuçları
         dataset_info : dict
-            Dataset information
+            Veri seti bilgileri
         preprocessing_info : dict
-            Preprocessing information
+            Ön işleme bilgileri
         models_info : dict
-            Models information
+            Model bilgileri
         save_path : str
-            Path to save the report
+            Raporu kaydetmek için yol
             
-        Returns:
+        Döndürür:
         --------
         report_files : dict
-            Dictionary of created report files
+            Oluşturulan rapor dosyalarının sözlüğü
         """
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
         
-        print("Generating comprehensive academic report...")
+        print("Kapsamlı akademik rapor üretiliyor...")
         
-        # Generate summary statistics
+        # Özet istatistikleri üret
         summary_stats = self.generate_model_summary_statistics(results_df)
         
-        # Create formatted tables
+        # Biçimlendirilmiş tablolar oluştur
         performance_table = self.create_performance_table(results_df)
         cv_table = self.create_cross_validation_table(cv_results)
         stats_table = self.create_statistical_significance_table(statistical_tests)
         
-        # Generate text sections
+        # Metin bölümlerini üret
         methodology = self.generate_methodology_section(
             dataset_info, preprocessing_info, models_info, {'cv_folds': 5}
         )
@@ -498,57 +498,57 @@ Model & {' & '.join(df.columns)} \\\\
             results_df, cv_results, statistical_tests, summary_stats
         )
         
-        # Create main report
+        # Ana raporu oluştur
         report_content = f"""
 {self.project_name}
 {'=' * len(self.project_name)}
 
-Author: {self.author}
-Institution: {self.institution}
-Date: {self.timestamp.strftime('%Y-%m-%d %H:%M:%S')}
+Yazar: {self.author}
+Kurum: {self.institution}
+Tarih: {self.timestamp.strftime('%Y-%m-%d %H:%M:%S')}
 
-ABSTRACT
---------
-This study presents a comprehensive comparison of machine learning algorithms
-for gene expression classification. Eight different models were evaluated
-using rigorous cross-validation and statistical testing methodologies.
+ÖZET
+----
+Bu çalışma, gen ifadesi sınıflandırması için makine öğrenmesi algoritmalarının
+kapsamlı bir karşılaştırmasını sunmaktadır. Sekiz farklı model, sakın çapraz
+doğrulama ve istatistiksel test metodolojileri kullanılarak değerlendirilmiştir.
 
 {methodology}
 
 {results_section}
 
-CONCLUSIONS
------------
-This comparative analysis provides insights into the relative performance
-of different machine learning approaches for gene expression data analysis.
-The results contribute to the understanding of optimal methodologies for
-genomic classification tasks.
+SONUÇLAR
+----------
+Bu karşılaştırmalı analiz, gen ifadesi veri analizi için farklı makine öğrenmesi
+yaklaşımlarının göreli performansı hakkında bilgiler sağlamaktadır.
+Sonuçlar, genomik sınıflandırma görevleri için optimal metodolojilerin
+anlaşılmasına katkıda bulunmaktadır.
 
-TABLES AND FIGURES
-------------------
-Generated visualizations and detailed tables are available in the results directory.
+TABLOLAR VE ŞEKİLLER
+---------------------
+Üretilen görselleştirmeler ve ayrıntılı tablolar sonuçlar dizininde mevcuttur.
 """
         
-        # Save main report
+        # Ana raporu kaydet
         with open(f"{save_path}_report.txt", 'w') as f:
             f.write(report_content)
         
-        # Save tables
+        # Tabloları kaydet
         performance_table.to_csv(f"{save_path}_performance_table.csv")
         cv_table.to_csv(f"{save_path}_cv_table.csv")
         if not stats_table.empty:
             stats_table.to_csv(f"{save_path}_statistical_tests.csv")
         
-        # Save LaTeX tables
+        # LaTeX tablolarını kaydet
         latex_performance = self.generate_latex_table(
-            performance_table, "Machine Learning Model Performance Comparison"
+            performance_table, "Makine Öğrenmesi Model Performans Karşılaştırması"
         )
         with open(f"{save_path}_performance_table.tex", 'w') as f:
             f.write(latex_performance)
         
-        # Save summary statistics
+        # Özet istatistikleri kaydet
         with open(f"{save_path}_summary_stats.json", 'w') as f:
-            # Convert numpy types for JSON serialization
+            # JSON serileştirme için numpy tiplerini dönüştür
             json_stats = {}
             for key, value in summary_stats.items():
                 if isinstance(value, dict):
@@ -570,7 +570,7 @@ Generated visualizations and detailed tables are available in the results direct
         if not stats_table.empty:
             report_files['statistical_tests'] = f"{save_path}_statistical_tests.csv"
         
-        print(f"Comprehensive report generated: {len(report_files)} files created")
+        print(f"Kapsamlı rapor üretildi: {len(report_files)} dosya oluşturuldu")
         
         return report_files
 
@@ -578,31 +578,31 @@ def generate_academic_report(results_df, cv_results, statistical_tests,
                            dataset_info, preprocessing_info, models_info,
                            save_path, project_name="Gene Expression ML Analysis"):
     """
-    Generate a complete academic report for the research.
+    Araştırma için tam akademik rapor üret.
     
-    Parameters:
+    Parametreler:
     -----------
     results_df : pandas.DataFrame
-        Test results
+        Test sonuçları
     cv_results : dict
-        Cross-validation results
+        Çapraz doğrulama sonuçları
     statistical_tests : dict
-        Statistical test results
+        İstatistiksel test sonuçları
     dataset_info : dict
-        Dataset information
+        Veri seti bilgileri
     preprocessing_info : dict
-        Preprocessing information
+        Ön işleme bilgileri
     models_info : dict
-        Models information
+        Model bilgileri
     save_path : str
-        Base path for saving report files
+        Rapor dosyalarını kaydetmek için temel yol
     project_name : str
-        Project name
+        Proje adı
         
-    Returns:
+    Döndürür:
     --------
     report_files : dict
-        Dictionary of created report files
+        Oluşturulan rapor dosyalarının sözlüğü
     """
     reporter = AcademicReporter(project_name=project_name)
     
@@ -615,5 +615,5 @@ def generate_academic_report(results_df, cv_results, statistical_tests,
     return report_files
 
 if __name__ == "__main__":
-    print("Academic reporting system ready!")
-    print("Use generate_academic_report() to create comprehensive research reports.")
+    print("Akademik raporlama sistemi hazır!")
+    print("Kapsamlı araştırma raporları oluşturmak için generate_academic_report() kullanın.")

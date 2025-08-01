@@ -1,19 +1,19 @@
 """
-Main Analysis Pipeline for Gene Expression Machine Learning Research
-===================================================================
+Gen İfadesi Makine Öğrenmesi Araştırması İçin Ana Analiz Hattı
+==================================================================
 
-This script executes the complete machine learning pipeline for gene expression
-analysis, from data generation to final research report generation.
+Bu betik, gen ifadesi analizi için veri üretiminden nihai araştırma raporu
+üretimine kadar tüm makine öğrenmesi hattını yürütür.
 
-Usage:
+Kullanım:
     python main_analysis.py
 
-Output:
-    - Synthetic gene expression dataset
-    - Trained machine learning models
-    - Comprehensive evaluation results
-    - Academic-style visualizations
-    - Research report with statistical analysis
+Çıktı:
+    - Sentetik gen ifadesi veri seti
+    - Eğitilmiş makine öğrenmesi modelleri
+    - Kapsamlı değerlendirme sonuçları
+    - Akademik tarzda görselleştirmeler
+    - İstatistiksel analiz ile araştırma raporu
 """
 
 import sys
@@ -23,12 +23,12 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-# Add project directories to path
+# Proje dizinlerini yola ekle
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(project_root, 'utils'))
 sys.path.append(os.path.join(project_root, 'models'))
 
-# Import project modules
+# Proje modüllerini içe aktar
 from data_generator import GeneExpressionGenerator
 from data_preprocessing import preprocess_gene_data
 from ml_models import GeneExpressionMLModels
@@ -38,19 +38,19 @@ from results_reporter import generate_academic_report
 
 class GeneExpressionAnalysisPipeline:
     """
-    Complete analysis pipeline for gene expression machine learning research.
+    Gen ifadesi makine öğrenmesi araştırması için tam analiz hattı.
     """
     
     def __init__(self, config=None):
         """
-        Initialize the analysis pipeline.
+        Analiz hattını başlat.
         
-        Parameters:
+        Parametreler:
         -----------
-        config : dict, optional
-            Configuration parameters for the analysis
+        config : dict, isteğe bağlı
+            Analiz için yapılandırma parametreleri
         """
-        # Default configuration
+        # Varsayılan yapılandırma
         self.config = {
             'dataset': {
                 'n_samples': 1000,
@@ -77,27 +77,27 @@ class GeneExpressionAnalysisPipeline:
             }
         }
         
-        # Update with user config if provided
+        # Sağlanırsa kullanıcı yapılandırması ile güncelle
         if config:
             self._update_config(self.config, config)
         
-        # Set up directories
+        # Dizinleri ayarla
         self.project_root = project_root
         self.data_dir = os.path.join(project_root, 'data')
         self.models_dir = os.path.join(project_root, 'models')
         self.results_dir = os.path.join(project_root, 'results')
         
-        # Create results subdirectories - Use fixed directory instead of timestamp
+        # Sonuç alt dizinlerini oluştur - Zaman damgası yerine sabit dizin kullan
         self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         self.run_results_dir = os.path.join(self.results_dir, 'latest_run')
         os.makedirs(self.run_results_dir, exist_ok=True)
         
-        print(f"Gene Expression Analysis Pipeline Initialized")
-        print(f"Results will be saved to: {self.run_results_dir}")
+        print(f"Gen İfadesi Analiz Hattı Başlatıldı")
+        print(f"Sonuçlar şuraya kaydedilecek: {self.run_results_dir}")
         print("=" * 60)
     
     def _update_config(self, base_config, update_config):
-        """Recursively update configuration dictionary."""
+        """Yapılandırma sözlüğünü özyinelemeli olarak güncelle."""
         for key, value in update_config.items():
             if key in base_config and isinstance(base_config[key], dict) and isinstance(value, dict):
                 self._update_config(base_config[key], value)
@@ -106,19 +106,19 @@ class GeneExpressionAnalysisPipeline:
     
     def step1_generate_dataset(self):
         """
-        Step 1: Generate synthetic gene expression dataset.
+        Adım 1: Sentetik gen ifadesi veri setini oluştur.
         
-        Returns:
+        Döndürür:
         --------
         dataset : dict
-            Generated dataset
+            Oluşturulan veri seti
         """
-        print("STEP 1: Generating Synthetic Gene Expression Dataset")
+        print("ADIM 1: Sentetik Gen İfadesi Veri Seti Oluşturuluyor")
         print("-" * 50)
         
         start_time = time.time()
         
-        # Initialize generator
+        # Üreticiyi başlat
         generator = GeneExpressionGenerator(
             n_samples=self.config['dataset']['n_samples'],
             n_genes=self.config['dataset']['n_genes'],
@@ -126,7 +126,7 @@ class GeneExpressionAnalysisPipeline:
             random_state=self.config['dataset']['random_state']
         )
         
-        # Generate dataset
+        # Veri setini oluştur
         dataset = generator.generate_complete_dataset(
             add_batch_effects=True,
             save_to_file=True,
@@ -134,26 +134,26 @@ class GeneExpressionAnalysisPipeline:
         )
         
         elapsed_time = time.time() - start_time
-        print(f"✓ Dataset generation completed in {elapsed_time:.2f} seconds")
+        print(f"✓ Veri seti üretimi {elapsed_time:.2f} saniyede tamamlandı")
         print()
         
         return dataset
     
     def step2_preprocess_data(self):
         """
-        Step 2: Preprocess the gene expression data.
+        Adım 2: Gen ifadesi verilerini ön işle.
         
-        Returns:
+        Döndürür:
         --------
         processed_data : dict
-            Preprocessed data and metadata
+            Ön işlenmiş veri ve meta veri
         """
-        print("STEP 2: Data Preprocessing and Feature Selection")
+        print("ADIM 2: Veri Ön İşleme ve Özellik Seçimi")
         print("-" * 50)
         
         start_time = time.time()
         
-        # Preprocess data
+        # Veriyi ön işle
         processed_data = preprocess_gene_data(
             expression_file=os.path.join(self.data_dir, 'gene_expression_data.csv'),
             labels_file=os.path.join(self.data_dir, 'sample_labels.csv'),
@@ -165,39 +165,39 @@ class GeneExpressionAnalysisPipeline:
         )
         
         elapsed_time = time.time() - start_time
-        print(f"✓ Data preprocessing completed in {elapsed_time:.2f} seconds")
+        print(f"✓ Veri ön işleme {elapsed_time:.2f} saniyede tamamlandı")
         print()
         
         return processed_data
     
     def step3_train_models(self, processed_data):
         """
-        Step 3: Train all machine learning models.
+        Adım 3: Tüm makine öğrenmesi modellerini eğit.
         
-        Parameters:
+        Parametreler:
         -----------
         processed_data : dict
-            Preprocessed data
+            Ön işlenmiş veri
             
-        Returns:
+        Döndürür:
         --------
         ml_models : GeneExpressionMLModels
-            Trained models framework
+            Eğitilmiş modeller çerçevesi
         """
-        print("STEP 3: Training Machine Learning Models")
+        print("ADIM 3: Makine Öğrenmesi Modelleri Eğitiliyor")
         print("-" * 50)
         
         start_time = time.time()
         
-        # Initialize ML models framework
+        # Makine öğrenmesi modelleri çerçevesini başlat
         ml_models = GeneExpressionMLModels(
             random_state=self.config['evaluation']['random_state']
         )
         
-        # Initialize all models
+        # Tüm modelleri başlat
         ml_models.initialize_models()
         
-        # Train all models
+        # Tüm modelleri eğit
         data_splits = processed_data['data_splits']
         fitted_models = ml_models.train_all_models(
             data_splits['X_train'], 
@@ -205,42 +205,42 @@ class GeneExpressionAnalysisPipeline:
             verbose=True
         )
         
-        # Save models if requested
+        # İstenirse modelleri kaydet
         if self.config['output']['save_models']:
             models_save_path = os.path.join(self.run_results_dir, 'trained_models')
             ml_models.save_models(models_save_path)
         
         elapsed_time = time.time() - start_time
-        print(f"✓ Model training completed in {elapsed_time:.2f} seconds")
-        print(f"✓ Successfully trained {len(fitted_models)} models")
+        print(f"✓ Model eğitimi {elapsed_time:.2f} saniyede tamamlandı")
+        print(f"✓ {len(fitted_models)} model başarıyla eğitildi")
         print()
         
         return ml_models
     
     def step4_evaluate_models(self, ml_models, processed_data):
         """
-        Step 4: Comprehensive model evaluation.
+        Adım 4: Kapsamlı model değerlendirmesi.
         
-        Parameters:
+        Parametreler:
         -----------
         ml_models : GeneExpressionMLModels
-            Trained models
+            Eğitilmiş modeller
         processed_data : dict
-            Preprocessed data
+            Ön işlenmiş veri
             
-        Returns:
+        Döndürür:
         --------
         evaluation_results : dict
-            Comprehensive evaluation results
+            Kapsamlı değerlendirme sonuçları
         """
-        print("STEP 4: Comprehensive Model Evaluation")
+        print("ADIM 4: Kapsamlı Model Değerlendirmesi")
         print("-" * 50)
         
         start_time = time.time()
         
         data_splits = processed_data['data_splits']
         
-        # Evaluate all models
+        # Tüm modelleri değerlendir
         evaluation_results = evaluate_model_performance(
             models_dict=ml_models.fitted_models,
             X_train=data_splits['X_train'],
@@ -252,43 +252,43 @@ class GeneExpressionAnalysisPipeline:
         )
         
         elapsed_time = time.time() - start_time
-        print(f"✓ Model evaluation completed in {elapsed_time:.2f} seconds")
+        print(f"✓ Model değerlendirmesi {elapsed_time:.2f} saniyede tamamlandı")
         print()
         
         return evaluation_results
     
     def step5_create_visualizations(self, evaluation_results, ml_models, processed_data):
         """
-        Step 5: Create academic-style visualizations.
+        Adım 5: Akademik tarzda görselleştirmeler oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         evaluation_results : dict
-            Evaluation results
+            Değerlendirme sonuçları
         ml_models : GeneExpressionMLModels
-            Trained models
+            Eğitilmiş modeller
         processed_data : dict
-            Preprocessed data
+            Ön işlenmiş veri
             
-        Returns:
+        Döndürür:
         --------
         figures : dict
-            Created visualization figures
+            Oluşturulan görselleştirme figürleri
         """
-        print("STEP 5: Creating Academic-Style Visualizations")
+        print("ADIM 5: Akademik Tarzda Görselleştirmeler Oluşturuluyor")
         print("-" * 50)
         
         if not self.config['output']['generate_visualizations']:
-            print("Visualization generation disabled in configuration")
+            print("Görselleştirme üretimi yapılandırmada devre dışı")
             return {}
         
         start_time = time.time()
         
-        # Convert results to DataFrame
+        # Sonuçları DataFrame'e dönüştür
         import pandas as pd
         results_df = pd.DataFrame(evaluation_results['test_results']).T
         
-        # Create visualizations
+        # Görselleştirmeleri oluştur
         data_splits = processed_data['data_splits']
         figures = create_academic_visualizations(
             results_df=results_df,
@@ -300,40 +300,40 @@ class GeneExpressionAnalysisPipeline:
         )
         
         elapsed_time = time.time() - start_time
-        print(f"✓ Visualization creation completed in {elapsed_time:.2f} seconds")
-        print(f"✓ Generated {len(figures)} visualization plots")
+        print(f"✓ Görselleştirme oluşturma {elapsed_time:.2f} saniyede tamamlandı")
+        print(f"✓ {len(figures)} görselleştirme grafiği oluşturuldu")
         print()
         
         return figures
     
     def step6_generate_report(self, evaluation_results, processed_data, ml_models):
         """
-        Step 6: Generate comprehensive academic report.
+        Adım 6: Kapsamlı akademik rapor oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         evaluation_results : dict
-            Evaluation results
+            Değerlendirme sonuçları
         processed_data : dict
-            Preprocessed data
+            Ön işlenmiş veri
         ml_models : GeneExpressionMLModels
-            Trained models
+            Eğitilmiş modeller
             
-        Returns:
+        Döndürür:
         --------
         report_files : dict
-            Generated report files
+            Oluşturulan rapor dosyaları
         """
-        print("STEP 6: Generating Academic Research Report")
+        print("ADIM 6: Akademik Araştırma Raporu Oluşturuluyor")
         print("-" * 50)
         
         if not self.config['output']['create_report']:
-            print("Report generation disabled in configuration")
+            print("Rapor üretimi yapılandırmada devre dışı")
             return {}
         
         start_time = time.time()
         
-        # Prepare information for report
+        # Rapor için bilgileri hazırla
         dataset_info = {
             'n_samples': self.config['dataset']['n_samples'],
             'n_genes': self.config['dataset']['n_genes'],
@@ -348,11 +348,11 @@ class GeneExpressionAnalysisPipeline:
         
         models_info = ml_models.get_model_info()
         
-        # Convert results to DataFrame
+        # Sonuçları DataFrame'e dönüştür
         import pandas as pd
         results_df = pd.DataFrame(evaluation_results['test_results']).T
         
-        # Generate report
+        # Raporu oluştur
         report_files = generate_academic_report(
             results_df=results_df,
             cv_results=evaluation_results['cv_results'],
@@ -365,94 +365,94 @@ class GeneExpressionAnalysisPipeline:
         )
         
         elapsed_time = time.time() - start_time
-        print(f"✓ Academic report generation completed in {elapsed_time:.2f} seconds")
-        print(f"✓ Generated {len(report_files)} report files")
+        print(f"✓ Akademik rapor üretimi {elapsed_time:.2f} saniyede tamamlandı")
+        print(f"✓ {len(report_files)} rapor dosyası oluşturuldu")
         print()
         
         return report_files
     
     def print_final_summary(self, evaluation_results, report_files):
         """
-        Print final summary of the analysis.
+        Analizin son özetini yazdır.
         
-        Parameters:
+        Parametreler:
         -----------
         evaluation_results : dict
-            Evaluation results
+            Değerlendirme sonuçları
         report_files : dict
-            Generated report files
+            Oluşturulan rapor dosyaları
         """
-        print("ANALYSIS COMPLETE - SUMMARY")
+        print("ANALİZ TAMAMLANDI - ÖZET")
         print("=" * 60)
         
-        # Best performing models
+        # En iyi performans gösteren modeller
         import pandas as pd
         results_df = pd.DataFrame(evaluation_results['test_results']).T
         
-        print("Best Performing Models:")
+        print("En İyi Performans Gösteren Modeller:")
         metrics = ['accuracy', 'f1_score', 'auc_roc']
         for metric in metrics:
             if metric in results_df.columns:
-                # Convert to numeric to handle any string values
+                # Herhangi bir dize değeri ele almak için sayısal değere dönüştür
                 metric_values = pd.to_numeric(results_df[metric], errors='coerce')
                 if metric_values.notna().any():
                     best_model = metric_values.idxmax()
                     best_score = metric_values.max()
                     print(f"  {metric.replace('_', ' ').title()}: {best_model} ({best_score:.3f})")
         
-        print(f"\nResults Directory: {self.run_results_dir}")
-        print(f"Generated Files:")
-        print(f"  - Dataset files: {len(os.listdir(self.data_dir))} files")
-        print(f"  - Evaluation results: Available")
-        print(f"  - Visualizations: Available")
+        print(f"\nSonuçlar Dizini: {self.run_results_dir}")
+        print(f"Oluşturulan Dosyalar:")
+        print(f"  - Veri seti dosyaları: {len(os.listdir(self.data_dir))} dosya")
+        print(f"  - Değerlendirme sonuçları: Mevcut")
+        print(f"  - Görselleştirmeler: Mevcut")
         if report_files:
-            print(f"  - Academic report: {len(report_files)} files")
+            print(f"  - Akademik rapor: {len(report_files)} dosya")
         
-        print(f"\nTimestamp: {self.timestamp}")
+        print(f"\nZaman Damgası: {self.timestamp}")
         print("=" * 60)
     
     def run_complete_analysis(self):
         """
-        Run the complete analysis pipeline.
+        Tam analiz hattını çalıştır.
         
-        Returns:
+        Döndürür:
         --------
         results : dict
-            Complete analysis results
+            Tam analiz sonuçları
         """
         pipeline_start_time = time.time()
         
-        print("GENE EXPRESSION MACHINE LEARNING ANALYSIS PIPELINE")
+        print("GEN İFADESİ MAKİNE ÖĞRENMESİ ANALİZ HATTI")
         print("=" * 60)
-        print(f"Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"Başlangıç Zamanı: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
         
         try:
-            # Step 1: Generate dataset
+            # Adım 1: Veri setini oluştur
             dataset = self.step1_generate_dataset()
             
-            # Step 2: Preprocess data
+            # Adım 2: Veriyi ön işle
             processed_data = self.step2_preprocess_data()
             
-            # Step 3: Train models
+            # Adım 3: Modelleri eğit
             ml_models = self.step3_train_models(processed_data)
             
-            # Step 4: Evaluate models
+            # Adım 4: Modelleri değerlendir
             evaluation_results = self.step4_evaluate_models(ml_models, processed_data)
             
-            # Step 5: Create visualizations
+            # Adım 5: Görselleştirmeleri oluştur
             figures = self.step5_create_visualizations(evaluation_results, ml_models, processed_data)
             
-            # Step 6: Generate report
+            # Adım 6: Raporu oluştur
             report_files = self.step6_generate_report(evaluation_results, processed_data, ml_models)
             
-            # Final summary
+            # Son özet
             self.print_final_summary(evaluation_results, report_files)
             
             pipeline_elapsed_time = time.time() - pipeline_start_time
-            print(f"\nTotal Pipeline Execution Time: {pipeline_elapsed_time:.2f} seconds")
+            print(f"\nToplam Hat Yürütme Süresi: {pipeline_elapsed_time:.2f} saniye")
             
-            # Compile complete results
+            # Tam sonuçları derle
             complete_results = {
                 'dataset': dataset,
                 'processed_data': processed_data,
@@ -468,16 +468,16 @@ class GeneExpressionAnalysisPipeline:
             return complete_results
             
         except Exception as e:
-            print(f"❌ Pipeline execution failed: {str(e)}")
+            print(f"❌ Hat yürütümü başarısız: {str(e)}")
             import traceback
             traceback.print_exc()
             return None
 
 def main():
     """
-    Main execution function.
+    Ana yürütme fonksiyonu.
     """
-    # You can customize the configuration here
+    # Yapılandırmayı burada özelleştirebilirsiniz
     custom_config = {
         'dataset': {
             'n_samples': 1000,
@@ -492,15 +492,15 @@ def main():
         }
     }
     
-    # Initialize and run pipeline
+    # Hattı başlat ve çalıştır
     pipeline = GeneExpressionAnalysisPipeline(config=custom_config)
     results = pipeline.run_complete_analysis()
     
     if results:
-        print("\n🎉 Analysis completed successfully!")
-        print(f"📁 Check results in: {results['results_directory']}")
+        print("\n🎉 Analiz başarıyla tamamlandı!")
+        print(f"📁 Sonuçları şurada kontrol edin: {results['results_directory']}")
     else:
-        print("\n❌ Analysis failed. Please check the error messages above.")
+        print("\n❌ Analiz başarısız. Lütfen yukarıdaki hata mesajlarını kontrol edin.")
 
 if __name__ == "__main__":
     main()

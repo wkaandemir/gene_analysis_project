@@ -1,9 +1,9 @@
 """
-Academic-Style Visualization Tools for Gene Expression ML Analysis
-=================================================================
+Gen İfadesi Makine Öğrenmesi Analizi için Akademik Tarz Görselleştirme Araçları
+===========================================================================
 
-This module provides publication-ready visualizations for machine learning
-model comparison in gene expression analysis research.
+Bu modül, gen ifadesi analizi araştırmasında makine öğrenmesi model
+karşılaştırması için yayına hazır görselleştirmeler sağlar.
 """
 
 import numpy as np
@@ -18,39 +18,39 @@ from plotly.subplots import make_subplots
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set publication-ready style
+# Yayına hazır stil ayarla
 plt.style.use('seaborn-v0_8-whitegrid')
 sns.set_palette("husl")
 
 class AcademicVisualizer:
     """
-    Academic-style visualization tools for ML model comparison.
+    Makine öğrenmesi model karşılaştırması için akademik tarz görselleştirme araçları.
     
-    Features:
-    - Publication-ready plots
-    - Consistent academic styling
-    - Statistical significance visualization
-    - Comprehensive model comparison plots
+    Özellikler:
+    - Yayına hazır grafikler
+    - Tutarlı akademik stil
+    - İstatistiksel anlamlılık görselleştirmesi
+    - Kapsamlı model karşılaştırma grafikleri
     """
     
     def __init__(self, figsize=(12, 8), dpi=300, style='academic'):
         """
-        Initialize the visualizer.
+        Görselleştiricyi başlat.
         
-        Parameters:
+        Parametreler:
         -----------
         figsize : tuple, default=(12, 8)
-            Default figure size
+            Varsayılan şekil boyutu
         dpi : int, default=300
-            Figure DPI for high-quality output
+            Yüksek kalite çıktı için şekil DPI
         style : str, default='academic'
-            Plotting style
+            Çizim stili
         """
         self.figsize = figsize
         self.dpi = dpi
         self.style = style
         
-        # Academic color palette
+        # Akademik renk paleti
         self.colors = {
             'primary': '#2E86AB',
             'secondary': '#A23B72',
@@ -61,7 +61,7 @@ class AcademicVisualizer:
             'neutral': '#6c757d'
         }
         
-        # Set matplotlib parameters for publication quality
+        # Yayın kalitesi için matplotlib parametrelerini ayarla
         plt.rcParams.update({
             'figure.dpi': self.dpi,
             'savefig.dpi': self.dpi,
@@ -100,7 +100,7 @@ class AcademicVisualizer:
         if metrics is None:
             metrics = [col for col in results_df.columns if col != 'model_name']
         
-        # Create subplots
+        # Alt grafikler oluştur
         n_metrics = len(metrics)
         n_cols = min(3, n_metrics)
         n_rows = (n_metrics + n_cols - 1) // n_cols
@@ -115,34 +115,34 @@ class AcademicVisualizer:
         else:
             axes = axes.flatten()
         
-        # Plot each metric
+        # Her metriği çiz
         for i, metric in enumerate(metrics):
             ax = axes[i] if i < len(axes) else None
             if ax is None:
                 continue
                 
-            # Prepare data
+            # Veriyi hazırla
             data = results_df[metric].dropna().sort_values(ascending=False)
             
-            # Create bar plot
+            # Çubuk grafik oluştur
             bars = ax.bar(range(len(data)), data.values, 
                          color=[self.colors['primary'] if i == 0 else self.colors['secondary'] 
                                for i in range(len(data))])
             
-            # Customize plot
+            # Grafiği özelleştir
             ax.set_title(f'{metric.replace("_", " ").title()}', fontweight='bold')
             ax.set_ylabel('Score')
             ax.set_xlabel('Models')
             ax.set_xticks(range(len(data)))
             ax.set_xticklabels(data.index, rotation=45, ha='right')
             
-            # Add value labels on bars
+            # Çubuklara değer etiketleri ekle
             for j, (bar, value) in enumerate(zip(bars, data.values)):
                 height = bar.get_height()
                 ax.text(bar.get_x() + bar.get_width()/2., height + 0.01,
                        f'{value:.3f}', ha='center', va='bottom', fontsize=9)
             
-            # Highlight best performer
+            # En iyi performans göstereni vurgula
             bars[0].set_color(self.colors['accent'])
             
             ax.grid(True, alpha=0.3)
@@ -157,38 +157,38 @@ class AcademicVisualizer:
         if save_path:
             plt.savefig(save_path, dpi=self.dpi, bbox_inches='tight', 
                        facecolor='white', edgecolor='none')
-            print(f"Performance comparison plot saved to {save_path}")
+            print(f"Performans karşılaştırma grafiği {save_path} konumuna kaydedildi")
         
         return fig
     
     def plot_model_ranking_heatmap(self, results_df, save_path=None,
                                   title="Model Performance Ranking Heatmap"):
         """
-        Create a heatmap showing model rankings across different metrics.
+        Farklı metrikler genelinde model sıralamalarını gösteren bir ısı haritası oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         results_df : pandas.DataFrame
-            Results dataframe with models as rows and metrics as columns
+            Satırlar model, sütunlar metrik olan sonuç dataframe'i
         save_path : str, optional
-            Path to save the figure
+            Şekli kaydetmek için yol
         title : str
-            Plot title
+            Grafik başlığı
             
-        Returns:
+        Döndürür:
         --------
         fig : matplotlib.figure.Figure
-            The created figure
+            Oluşturulan şekil
         """
-        # Calculate rankings (1 = best, higher = worse)
+        # Sıraları hesapla (1 = en iyi, yüksek = daha kötü)
         metrics = [col for col in results_df.columns if col != 'model_name']
         ranking_df = results_df[metrics].rank(ascending=False, method='min')
         ranking_df.index = results_df.index
         
-        # Create heatmap
+        # Isı haritası oluştur
         fig, ax = plt.subplots(figsize=(len(metrics) * 1.2, len(results_df) * 0.6))
         
-        # Custom colormap (lower rank = better = darker color)
+        # Özel renk haritası (düşük sıra = daha iyi = daha koyu renk)
         cmap = sns.color_palette("RdYlBu_r", as_cmap=True)
         
         sns.heatmap(ranking_df, annot=True, fmt='.0f', cmap=cmap,
@@ -199,7 +199,7 @@ class AcademicVisualizer:
         ax.set_xlabel('Performance Metrics', fontweight='bold')
         ax.set_ylabel('Machine Learning Models', fontweight='bold')
         
-        # Rotate labels
+        # Etiketleri döndür
         ax.set_xticklabels([label.get_text().replace('_', ' ').title() 
                            for label in ax.get_xticklabels()], rotation=45, ha='right')
         ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
@@ -209,7 +209,7 @@ class AcademicVisualizer:
         if save_path:
             plt.savefig(save_path, dpi=self.dpi, bbox_inches='tight',
                        facecolor='white', edgecolor='none')
-            print(f"Ranking heatmap saved to {save_path}")
+            print(f"Sıralama ısı haritası {save_path} konumuna kaydedildi")
         
         return fig
     
@@ -238,7 +238,7 @@ class AcademicVisualizer:
         """
         fig, ax = plt.subplots(figsize=self.figsize)
         
-        # Convert string labels to numeric if necessary
+        # Gerekirse string etiketleri sayısal değere dönüştür
         if hasattr(y_test, 'dtype') and y_test.dtype == 'object':
             y_test_encoded = pd.Categorical(y_test).codes
         else:
@@ -248,7 +248,7 @@ class AcademicVisualizer:
         
         for i, (model_name, model) in enumerate(models_dict.items()):
             try:
-                # Get prediction probabilities
+                # Tahmin olasılıklarını al
                 if hasattr(model, 'predict_proba'):
                     y_pred_proba = model.predict_proba(X_test)
                     if y_pred_proba.shape[1] == 2:
@@ -260,19 +260,19 @@ class AcademicVisualizer:
                 else:
                     continue
                 
-                # Calculate ROC curve
+                # ROC eğrisini hesapla
                 fpr, tpr, _ = roc_curve(y_test_encoded, y_scores)
                 auc_score = np.trapz(tpr, fpr)
                 
-                # Plot curve
+                # Eğriyi çiz
                 ax.plot(fpr, tpr, color=colors[i], lw=2,
                        label=f'{model_name} (AUC = {auc_score:.3f})')
                 
             except Exception as e:
-                print(f"Could not plot ROC curve for {model_name}: {e}")
+                print(f"{model_name} için ROC eğrisi çizilemedi: {e}")
                 continue
         
-        # Plot diagonal line
+        # Köşegen çizgiyi çiz
         ax.plot([0, 1], [0, 1], 'k--', lw=1, alpha=0.6)
         
         # Customize plot
@@ -289,32 +289,32 @@ class AcademicVisualizer:
         if save_path:
             plt.savefig(save_path, dpi=self.dpi, bbox_inches='tight',
                        facecolor='white', edgecolor='none')
-            print(f"ROC curves plot saved to {save_path}")
+            print(f"ROC eğrileri grafiği {save_path} konumuna kaydedildi")
         
         return fig
     
     def plot_confusion_matrices(self, models_dict, X_test, y_test, save_path=None,
                                title="Confusion Matrices Comparison"):
         """
-        Plot confusion matrices for all models.
+        Tüm modeller için karışıklık matrislerini çiz.
         
-        Parameters:
+        Parametreler:
         -----------
         models_dict : dict
-            Dictionary of trained models
+            Eğitilmiş modellerin sözlüğü
         X_test : array-like
-            Test features
+            Test özellikleri
         y_test : array-like
-            Test labels
+            Test etiketleri
         save_path : str, optional
-            Path to save the figure
+            Şekli kaydetmek için yol
         title : str
-            Plot title
+            Grafik başlığı
             
-        Returns:
+        Döndürür:
         --------
         fig : matplotlib.figure.Figure
-            The created figure
+            Oluşturulan şekil
         """
         n_models = len(models_dict)
         n_cols = min(4, n_models)
@@ -331,7 +331,7 @@ class AcademicVisualizer:
         else:
             axes = axes.flatten()
         
-        # Get unique labels
+        # Benzersiz etiketleri al
         unique_labels = np.unique(y_test)
         
         for i, (model_name, model) in enumerate(models_dict.items()):
@@ -340,13 +340,13 @@ class AcademicVisualizer:
                 continue
             
             try:
-                # Get predictions
+                # Tahminleri al
                 y_pred = model.predict(X_test)
                 
-                # Calculate confusion matrix
+                # Karışıklık matrisini hesapla
                 cm = confusion_matrix(y_test, y_pred, labels=unique_labels)
                 
-                # Plot confusion matrix
+                # Karışıklık matrisini çiz
                 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                            xticklabels=unique_labels, yticklabels=unique_labels,
                            ax=ax, cbar=False)
@@ -356,8 +356,8 @@ class AcademicVisualizer:
                 ax.set_ylabel('True Label', fontweight='bold')
                 
             except Exception as e:
-                print(f"Could not plot confusion matrix for {model_name}: {e}")
-                ax.text(0.5, 0.5, f'Error plotting\n{model_name}', 
+                print(f"{model_name} için karışıklık matrisi çizilemedi: {e}")
+                ax.text(0.5, 0.5, f'Çizim hatası\n{model_name}', 
                        ha='center', va='center', transform=ax.transAxes)
         
         # Remove empty subplots
@@ -369,35 +369,35 @@ class AcademicVisualizer:
         if save_path:
             plt.savefig(save_path, dpi=self.dpi, bbox_inches='tight',
                        facecolor='white', edgecolor='none')
-            print(f"Confusion matrices plot saved to {save_path}")
+            print(f"Karışıklık matrisleri grafiği {save_path} konumuna kaydedildi")
         
         return fig
     
     def plot_cross_validation_results(self, cv_results, metric='accuracy', 
                                      save_path=None, title=None):
         """
-        Plot cross-validation results with error bars.
+        Hata çubukları ile çapraz doğrulama sonuçlarını çiz.
         
-        Parameters:
+        Parametreler:
         -----------
         cv_results : dict
-            Cross-validation results from ModelEvaluator
+            ModelEvaluator'dan çapraz doğrulama sonuçları
         metric : str, default='accuracy'
-            Metric to plot
+            Çizilecek metrik
         save_path : str, optional
-            Path to save the figure
+            Şekli kaydetmek için yol
         title : str, optional
-            Plot title
+            Grafik başlığı
             
-        Returns:
+        Döndürür:
         --------
         fig : matplotlib.figure.Figure
-            The created figure
+            Oluşturulan şekil
         """
         if title is None:
             title = f"Cross-Validation Results: {metric.replace('_', ' ').title()}"
         
-        # Prepare data
+        # Veriyi hazırla
         model_names = []
         means = []
         stds = []
@@ -409,20 +409,20 @@ class AcademicVisualizer:
                 stds.append(results[metric]['std'])
         
         if not model_names:
-            print(f"No data available for metric: {metric}")
+            print(f"Metrik için veri mevcut değil: {metric}")
             return None
         
-        # Sort by mean performance
+        # Ortalama performansa göre sırala
         sorted_data = sorted(zip(model_names, means, stds), 
                            key=lambda x: x[1], reverse=True)
         model_names, means, stds = zip(*sorted_data)
         
-        # Create plot
+        # Grafik oluştur
         fig, ax = plt.subplots(figsize=self.figsize)
         
         x_pos = np.arange(len(model_names))
         
-        # Create bars with error bars
+        # Hata çubukları ile çubuklar oluştur
         bars = ax.bar(x_pos, means, yerr=stds, capsize=5,
                      color=[self.colors['primary'] if i == 0 else self.colors['secondary'] 
                            for i in range(len(means))],
@@ -452,43 +452,43 @@ class AcademicVisualizer:
         if save_path:
             plt.savefig(save_path, dpi=self.dpi, bbox_inches='tight',
                        facecolor='white', edgecolor='none')
-            print(f"Cross-validation results plot saved to {save_path}")
+            print(f"Çapraz doğrulama sonuçları grafiği {save_path} konumuna kaydedildi")
         
         return fig
     
     def create_comprehensive_report(self, results_df, cv_results, models_dict, 
                                   X_test, y_test, save_dir):
         """
-        Create a comprehensive visualization report.
+        Kapsamlı görselleştirme raporu oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         results_df : pandas.DataFrame
-            Test results dataframe
+            Test sonuçları dataframe'i
         cv_results : dict
-            Cross-validation results
+            Çapraz doğrulama sonuçları
         models_dict : dict
-            Dictionary of trained models
+            Eğitilmiş modellerin sözlüğü
         X_test : array-like
-            Test features
+            Test özellikleri
         y_test : array-like
-            Test labels
+            Test etiketleri
         save_dir : str
-            Directory to save all plots
+            Tüm grafikleri kaydetmek için dizin
             
-        Returns:
+        Döndürür:
         --------
         figures : dict
-            Dictionary of created figures
+            Oluşturulan şekillerin sözlüğü
         """
         import os
         os.makedirs(save_dir, exist_ok=True)
         
         figures = {}
         
-        print("Creating comprehensive visualization report...")
+        print("Kapsamlı görselleştirme raporu oluşturuluyor...")
         
-        # 1. Performance comparison
+        # 1. Performans karşılaştırması
         try:
             fig1 = self.plot_performance_comparison(
                 results_df, 
@@ -496,9 +496,9 @@ class AcademicVisualizer:
             )
             figures['performance_comparison'] = fig1
         except Exception as e:
-            print(f"Error creating performance comparison: {e}")
+            print(f"Performans karşılaştırması oluşturulurken hata: {e}")
         
-        # 2. Ranking heatmap
+        # 2. Sıralama ısı haritası
         try:
             fig2 = self.plot_model_ranking_heatmap(
                 results_df,
@@ -506,9 +506,9 @@ class AcademicVisualizer:
             )
             figures['ranking_heatmap'] = fig2
         except Exception as e:
-            print(f"Error creating ranking heatmap: {e}")
+            print(f"Sıralama ısı haritası oluşturulurken hata: {e}")
         
-        # 3. ROC curves
+        # 3. ROC eğrileri
         try:
             fig3 = self.plot_roc_curves(
                 models_dict, X_test, y_test,
@@ -516,9 +516,9 @@ class AcademicVisualizer:
             )
             figures['roc_curves'] = fig3
         except Exception as e:
-            print(f"Error creating ROC curves: {e}")
+            print(f"ROC eğrileri oluşturulurken hata: {e}")
         
-        # 4. Confusion matrices
+        # 4. Karışıklık matrisleri
         try:
             fig4 = self.plot_confusion_matrices(
                 models_dict, X_test, y_test,
@@ -526,9 +526,9 @@ class AcademicVisualizer:
             )
             figures['confusion_matrices'] = fig4
         except Exception as e:
-            print(f"Error creating confusion matrices: {e}")
+            print(f"Karışıklık matrisleri oluşturulurken hata: {e}")
         
-        # 5. Cross-validation results
+        # 5. Çapraz doğrulama sonuçları
         if cv_results:
             metrics = ['accuracy', 'precision_weighted', 'recall_weighted', 'f1_weighted']
             for metric in metrics:
@@ -540,37 +540,37 @@ class AcademicVisualizer:
                     if fig:
                         figures[f'cv_{metric}'] = fig
                 except Exception as e:
-                    print(f"Error creating CV plot for {metric}: {e}")
+                    print(f"{metric} için çapraz doğrulama grafiği oluşturulurken hata: {e}")
         
-        print(f"Comprehensive report created in {save_dir}")
-        print(f"Generated {len(figures)} visualization plots")
+        print(f"Kapsamlı rapor {save_dir} konumunda oluşturuldu")
+        print(f"{len(figures)} görselleştirme grafiği üretildi")
         
         return figures
 
 def create_academic_visualizations(results_df, cv_results, models_dict, 
                                  X_test, y_test, save_dir):
     """
-    Create all academic-style visualizations for the research paper.
+    Araştırma makalesi için tüm akademik tarz görselleştirmeleri oluştur.
     
-    Parameters:
+    Parametreler:
     -----------
     results_df : pandas.DataFrame
-        Test results dataframe
+        Test sonuçları dataframe'i
     cv_results : dict
-        Cross-validation results
+        Çapraz doğrulama sonuçları
     models_dict : dict
-        Dictionary of trained models
+        Eğitilmiş modellerin sözlüğü
     X_test : array-like
-        Test features
+        Test özellikleri
     y_test : array-like
-        Test labels
+        Test etiketleri
     save_dir : str
-        Directory to save all plots
+        Tüm grafikleri kaydetmek için dizin
         
-    Returns:
+    Döndürür:
     --------
     figures : dict
-        Dictionary of created figures
+        Oluşturulan şekillerin sözlüğü
     """
     visualizer = AcademicVisualizer()
     
@@ -581,5 +581,5 @@ def create_academic_visualizations(results_df, cv_results, models_dict,
     return figures
 
 if __name__ == "__main__":
-    print("Academic visualization tools ready!")
-    print("Use create_academic_visualizations() to generate all plots.")
+    print("Akademik görselleştirme araçları hazır!")
+    print("Tüm grafikleri üretmek için create_academic_visualizations() kullanın.")

@@ -1,9 +1,9 @@
 """
-Data Preprocessing Pipeline for Gene Expression Analysis
-======================================================
+Gen İfadesi Analizi için Veri Önİşleme Hattı
+=============================================
 
-This module provides comprehensive preprocessing utilities for gene expression
-data including normalization, feature selection, and data splitting.
+Bu modül, gen ifadesi verisi için normalizasyon, özellik seçimi ve
+veri bölümleme dahil kapsamlı ön işleme araçları sağlar.
 """
 
 import numpy as np
@@ -22,24 +22,24 @@ warnings.filterwarnings('ignore')
 
 class GeneExpressionPreprocessor:
     """
-    Comprehensive preprocessing pipeline for gene expression data.
+    Gen ifadesi verisi için kapsamlı ön işleme hattı.
     
-    Features:
-    - Multiple normalization methods
-    - Feature selection techniques
-    - Batch effect correction
-    - Data quality control
-    - Train/validation/test splitting
+    Özellikler:
+    - Çoklu normalizasyon yöntemleri
+    - Özellik seçimi teknikleri
+    - Parti etkisi düzeltmesi
+    - Veri kalite kontrolü
+    - Eğitim/doğrulama/test bölümleme
     """
     
     def __init__(self, random_state=42):
         """
-        Initialize the preprocessor.
+        Ön işlemciyi başlat.
         
-        Parameters:
+        Parametreler:
         -----------
         random_state : int, default=42
-            Random seed for reproducibility
+            Tekrarlanabilirlik için rastgele tohum
         """
         self.random_state = random_state
         self.scalers = {}
@@ -49,47 +49,47 @@ class GeneExpressionPreprocessor:
     def quality_control(self, expression_data, min_expression=0.1, 
                        max_missing_rate=0.1):
         """
-        Perform quality control on gene expression data.
+        Gen ifadesi verisi üzerinde kalite kontrolü gerçekleştir.
         
-        Parameters:
+        Parametreler:
         -----------
         expression_data : pandas.DataFrame
-            Gene expression data (samples x genes)
+            Gen ifadesi verisi (örnekler x genler)
         min_expression : float, default=0.1
-            Minimum expression threshold for gene filtering
+            Gen filtreleme için minimum ifade eşiği
         max_missing_rate : float, default=0.1
-            Maximum allowed missing value rate per gene
+            Gen başına izin verilen maksimum eksik değer oranı
             
-        Returns:
+        Döndürür:
         --------
         filtered_data : pandas.DataFrame
-            Quality-controlled expression data
+            Kalite kontrollü yapılmış ifade verisi
         qc_stats : dict
-            Quality control statistics
+            Kalite kontrol istatistikleri
         """
-        print("Performing quality control...")
+        print("Kalite kontrolü gerçekleştiriliyor...")
         
         original_shape = expression_data.shape
         
-        # Check for missing values
+        # Eksik değerleri kontrol et
         missing_rates = expression_data.isnull().sum() / len(expression_data)
         high_missing_genes = missing_rates[missing_rates > max_missing_rate].index
         
-        # Remove genes with too many missing values
+        # Çok fazla eksik değere sahip genleri kaldır
         filtered_data = expression_data.drop(columns=high_missing_genes)
         
-        # Fill remaining missing values with gene median
+        # Kalan eksik değerleri gen medyanı ile doldur
         for col in filtered_data.columns:
             if filtered_data[col].isnull().any():
                 median_val = filtered_data[col].median()
                 filtered_data[col].fillna(median_val, inplace=True)
         
-        # Remove genes with very low expression across all samples
+        # Tüm örneklerde çok düşük ifadeye sahip genleri kaldır
         mean_expression = filtered_data.mean()
         low_expression_genes = mean_expression[mean_expression < min_expression].index
         filtered_data = filtered_data.drop(columns=low_expression_genes)
         
-        # Remove genes with zero variance
+        # Sıfır varyansa sahip genleri kaldır
         gene_variances = filtered_data.var()
         zero_variance_genes = gene_variances[gene_variances == 0].index
         filtered_data = filtered_data.drop(columns=zero_variance_genes)
@@ -104,33 +104,33 @@ class GeneExpressionPreprocessor:
             'samples_retained': filtered_data.shape[0]
         }
         
-        print(f"QC completed: {original_shape} -> {filtered_data.shape}")
-        print(f"Removed {len(high_missing_genes)} high-missing genes")
-        print(f"Removed {len(low_expression_genes)} low-expression genes")
-        print(f"Removed {len(zero_variance_genes)} zero-variance genes")
+        print(f"Kalite kontrolü tamamlandı: {original_shape} -> {filtered_data.shape}")
+        print(f"{len(high_missing_genes)} yüksek eksik genler kaldırıldı")
+        print(f"{len(low_expression_genes)} düşük ifadeli genler kaldırıldı")
+        print(f"{len(zero_variance_genes)} sıfır varyanslı genler kaldırıldı")
         
         return filtered_data, qc_stats
     
     def normalize_data(self, expression_data, method='robust'):
         """
-        Normalize gene expression data using various methods.
+        Çeşitli yöntemler kullanarak gen ifadesi verisini normalize et.
         
-        Parameters:
+        Parametreler:
         -----------
         expression_data : pandas.DataFrame
-            Gene expression data (samples x genes)
+            Gen ifadesi verisi (örnekler x genler)
         method : str, default='robust'
-            Normalization method: 'standard', 'robust', 'minmax', 'log2'
+            Normalizasyon yöntemi: 'standard', 'robust', 'minmax', 'log2'
             
-        Returns:
+        Döndürür:
         --------
         normalized_data : pandas.DataFrame
-            Normalized expression data
+            Normalize edilmiş ifade verisi
         """
-        print(f"Normalizing data using {method} method...")
+        print(f"{method} yöntemi kullanılarak veri normalize ediliyor...")
         
         if method == 'log2':
-            # Log2 transformation (add pseudocount to avoid log(0))
+            # Log2 dönüşümü (log(0)'dan kaçınmak için sahte sayım ekle)
             normalized_data = np.log2(expression_data + 1)
             
         elif method == 'standard':
@@ -164,44 +164,44 @@ class GeneExpressionPreprocessor:
             self.scalers['minmax'] = scaler
             
         else:
-            raise ValueError(f"Unknown normalization method: {method}")
+            raise ValueError(f"Bilinmeyen normalizasyon yöntemi: {method}")
         
-        print(f"Data normalized: mean={normalized_data.mean().mean():.3f}, "
-              f"std={normalized_data.std().mean():.3f}")
+        print(f"Veri normalize edildi: ortalama={normalized_data.mean().mean():.3f}, "
+              f"standart sapma={normalized_data.std().mean():.3f}")
         
         return normalized_data
     
     def select_features(self, X, y, method='mutual_info', k_features=100):
         """
-        Select most informative features for classification.
+        Sınıflandırma için en bilgilendirici özellikleri seç.
         
-        Parameters:
+        Parametreler:
         -----------
         X : pandas.DataFrame
-            Feature matrix (samples x genes)
+            Özellik matrisi (örnekler x genler)
         y : pandas.Series
-            Target labels
+            Hedef etiketler
         method : str, default='mutual_info'
-            Feature selection method: 'mutual_info', 'f_test', 'rfe_rf', 'lasso'
+            Özellik seçim yöntemi: 'mutual_info', 'f_test', 'rfe_rf', 'lasso'
         k_features : int, default=100
-            Number of features to select
+            Seçilecek özellik sayısı
             
-        Returns:
+        Döndürür:
         --------
         X_selected : pandas.DataFrame
-            Selected features
+            Seçilen özellikler
         feature_scores : pandas.Series
-            Feature importance scores
+            Özellik önem puanları
         """
-        # Adjust k_features if it exceeds available features
+        # Eğer mevcut özellik sayısını aşarsa k_features'u ayarla
         n_available_features = X.shape[1]
         k_features_adjusted = min(k_features, n_available_features)
         
-        print(f"Selecting {k_features_adjusted} features using {method} method...")
+        print(f"{method} yöntemi kullanılarak {k_features_adjusted} özellik seçiliyor...")
         if k_features_adjusted < k_features:
-            print(f"Note: Only {n_available_features} features available after QC")
+            print(f"Not: Kalite kontrolünden sonra sadece {n_available_features} özellik mevcut")
         
-        # Encode labels if they are strings
+        # Eğer string ise etiketleri kodla
         if y.dtype == 'object':
             y_encoded = pd.Categorical(y).codes
         else:
@@ -252,7 +252,7 @@ class GeneExpressionPreprocessor:
             lasso = LassoCV(cv=5, random_state=self.random_state, max_iter=1000)
             lasso.fit(X, y_encoded)
             
-            # Select features with non-zero coefficients
+            # Sıfır olmayan katsayılara sahip özellikleri seç
             feature_importance = np.abs(lasso.coef_)
             top_indices = np.argsort(feature_importance)[-k_features_adjusted:]
             selected_features = X.columns[top_indices]
@@ -264,51 +264,51 @@ class GeneExpressionPreprocessor:
             ).sort_values(ascending=False)
             
         else:
-            raise ValueError(f"Unknown feature selection method: {method}")
+            raise ValueError(f"Bilinmeyen özellik seçim yöntemi: {method}")
         
-        # Store results
+        # Sonuçları sakla
         self.feature_selectors[method] = selector if method != 'lasso' else None
         self.selected_features[method] = selected_features
         
-        # Convert back to DataFrame
+        # DataFrame'e geri dönüştür
         X_selected = pd.DataFrame(
             X_selected, 
             index=X.index, 
             columns=selected_features
         )
         
-        print(f"Selected {len(selected_features)} features")
-        print(f"Top 5 features: {list(selected_features[:5])}")
+        print(f"{len(selected_features)} özellik seçildi")
+        print(f"İlk 5 özellik: {list(selected_features[:5])}")
         
         return X_selected, feature_scores
     
     def split_data(self, X, y, test_size=0.2, val_size=0.2, stratify=True):
         """
-        Split data into train, validation, and test sets.
+        Veriyi eğitim, doğrulama ve test kümelerine böl.
         
-        Parameters:
+        Parametreler:
         -----------
         X : pandas.DataFrame
-            Feature matrix
+            Özellik matrisi
         y : pandas.Series
-            Target labels
+            Hedef etiketler
         test_size : float, default=0.2
-            Proportion of data for test set
+            Test kümesi için veri oranı
         val_size : float, default=0.2
-            Proportion of remaining data for validation set
+            Doğrulama kümesi için kalan verinin oranı
         stratify : bool, default=True
-            Whether to maintain class proportions in splits
+            Bölümlerde sınıf oranlarının korunup korunmayacağı
             
-        Returns:
+        Döndürür:
         --------
         data_splits : dict
-            Dictionary containing train/val/test splits
+            Eğitim/doğrulama/test bölümlerini içeren sözlük
         """
-        print(f"Splitting data: train/val/test")
+        print(f"Veri bölünüyor: eğitim/doğrulama/test")
         
         stratify_y = y if stratify else None
         
-        # First split: separate test set
+        # İlk bölüm: test kümesini ayır
         X_temp, X_test, y_temp, y_test = train_test_split(
             X, y, 
             test_size=test_size, 
@@ -316,7 +316,7 @@ class GeneExpressionPreprocessor:
             stratify=stratify_y
         )
         
-        # Second split: separate train and validation from remaining data
+        # İkinci bölüm: kalan veriden eğitim ve doğrulama kümelerini ayır
         val_size_adjusted = val_size / (1 - test_size)
         stratify_temp = y_temp if stratify else None
         
@@ -336,40 +336,40 @@ class GeneExpressionPreprocessor:
             'y_test': y_test
         }
         
-        print(f"Train set: {X_train.shape[0]} samples")
-        print(f"Validation set: {X_val.shape[0]} samples")
-        print(f"Test set: {X_test.shape[0]} samples")
+        print(f"Eğitim kümesi: {X_train.shape[0]} örnek")
+        print(f"Doğrulama kümesi: {X_val.shape[0]} örnek")
+        print(f"Test kümesi: {X_test.shape[0]} örnek")
         
-        # Print class distributions
+        # Sınıf dağılımlarını yazdır
         if stratify:
-            print("\nClass distributions:")
-            print(f"Train: {y_train.value_counts().to_dict()}")
-            print(f"Val: {y_val.value_counts().to_dict()}")
+            print("\nSınıf dağılımları:")
+            print(f"Eğitim: {y_train.value_counts().to_dict()}")
+            print(f"Doğrulama: {y_val.value_counts().to_dict()}")
             print(f"Test: {y_test.value_counts().to_dict()}")
         
         return data_splits
     
     def create_cross_validation_splits(self, X, y, n_splits=5, stratified=True):
         """
-        Create cross-validation splits for model evaluation.
+        Model değerlendirmesi için çapraz doğrulama bölümleri oluştur.
         
-        Parameters:
+        Parametreler:
         -----------
         X : pandas.DataFrame
-            Feature matrix
+            Özellik matrisi
         y : pandas.Series
-            Target labels
+            Hedef etiketler
         n_splits : int, default=5
-            Number of CV folds
+            Çapraz doğrulama kat sayısı
         stratified : bool, default=True
-            Whether to use stratified CV
+            Tabakalı çapraz doğrulama kullanılıp kullanılmayacağı
             
-        Returns:
+        Döndürür:
         --------
         cv_splits : list
-            List of (train_idx, val_idx) tuples for each fold
+            Her kat için (train_idx, val_idx) ikili listesi
         """
-        print(f"Creating {n_splits}-fold cross-validation splits...")
+        print(f"{n_splits} katlı çapraz doğrulama bölümleri oluşturuluyor...")
         
         if stratified:
             cv = StratifiedKFold(
@@ -387,18 +387,18 @@ class GeneExpressionPreprocessor:
         
         cv_splits = list(cv.split(X, y))
         
-        print(f"Created {len(cv_splits)} CV folds")
+        print(f"{len(cv_splits)} çapraz doğrulama katı oluşturuldu")
         
         return cv_splits
     
     def get_preprocessing_summary(self):
         """
-        Get summary of preprocessing steps performed.
+        Gerçekleştirilen ön işleme adımlarının özetini al.
         
-        Returns:
+        Döndürür:
         --------
         summary : dict
-            Summary of preprocessing pipeline
+            Ön işleme hattının özeti
         """
         summary = {
             'scalers_used': list(self.scalers.keys()),
@@ -418,62 +418,62 @@ def preprocess_gene_data(expression_file, labels_file,
                         test_size=0.2,
                         val_size=0.2):
     """
-    Complete preprocessing pipeline for gene expression data.
+    Gen ifadesi verisi için tam ön işleme hattı.
     
-    Parameters:
+    Parametreler:
     -----------
     expression_file : str
-        Path to gene expression CSV file
+        Gen ifadesi CSV dosyası yolu
     labels_file : str
-        Path to labels CSV file
+        Etiketler CSV dosyası yolu
     normalization : str, default='robust'
-        Normalization method
+        Normalizasyon yöntemi
     feature_selection : str, default='mutual_info'
-        Feature selection method
+        Özellik seçim yöntemi
     n_features : int, default=100
-        Number of features to select
+        Seçilecek özellik sayısı
     test_size : float, default=0.2
-        Test set proportion
+        Test kümesi oranı
     val_size : float, default=0.2
-        Validation set proportion
+        Doğrulama kümesi oranı
         
-    Returns:
+    Döndürür:
     --------
     processed_data : dict
-        Dictionary containing all processed data and metadata
+        Tüm işlenmiş veri ve meta verileri içeren sözlük
     """
-    print("Starting complete preprocessing pipeline...")
+    print("Tam ön işleme hattı başlatılıyor...")
     
-    # Load data
-    print("Loading data...")
+    # Veriyi yükle
+    print("Veri yüklünüyor...")
     expression_data = pd.read_csv(expression_file, index_col=0)
     labels = pd.read_csv(labels_file, index_col=0).squeeze()
     
-    # Initialize preprocessor
+    # Ön işlemciyi başlat
     preprocessor = GeneExpressionPreprocessor()
     
-    # Quality control
+    # Kalite kontrolü
     expression_data, qc_stats = preprocessor.quality_control(expression_data)
     
-    # Normalization
+    # Normalizasyon
     normalized_data = preprocessor.normalize_data(expression_data, method=normalization)
     
-    # Feature selection
+    # Özellik seçimi
     selected_data, feature_scores = preprocessor.select_features(
         normalized_data, labels, method=feature_selection, k_features=n_features
     )
     
-    # Data splitting
+    # Veri bölümleme
     data_splits = preprocessor.split_data(
         selected_data, labels, test_size=test_size, val_size=val_size
     )
     
-    # Cross-validation splits
+    # Çapraz doğrulama bölümleri
     cv_splits = preprocessor.create_cross_validation_splits(
         data_splits['X_train'], data_splits['y_train']
     )
     
-    # Compile results
+    # Sonuçları derle
     processed_data = {
         'data_splits': data_splits,
         'cv_splits': cv_splits,
@@ -483,12 +483,12 @@ def preprocess_gene_data(expression_file, labels_file,
         'preprocessor': preprocessor
     }
     
-    print("Preprocessing pipeline completed successfully!")
+    print("Ön işleme hattı başarıyla tamamlandı!")
     
     return processed_data
 
 if __name__ == "__main__":
-    # Example usage
+    # Örnek kullanım
     data_path = "/home/ubuntu-kaan/ml-yeni/gene_analysis_project/data"
     
     processed = preprocess_gene_data(
@@ -496,4 +496,4 @@ if __name__ == "__main__":
         labels_file=f"{data_path}/sample_labels.csv"
     )
     
-    print("Preprocessing completed!")
+    print("Ön işleme tamamlandı!")

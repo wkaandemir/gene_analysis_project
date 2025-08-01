@@ -1,9 +1,9 @@
 """
-Comprehensive Evaluation Framework for Gene Expression ML Models
-===============================================================
+Gen İfadesi Makine Öğrenmesi Modelleri için Kapsamlı Değerlendirme Çerçevesi
+==========================================================================
 
-This module provides extensive evaluation metrics, statistical tests, and 
-visualization tools for comparing machine learning models in gene expression analysis.
+Bu modül, gen ifadesi analizinde makine öğrenmesi modellerini karşılaştırmak
+için kapsamlı değerlendirme metrikleri, istatistiksel testler ve görselleştirme araçları sağlar.
 """
 
 import numpy as np
@@ -24,24 +24,24 @@ warnings.filterwarnings('ignore')
 
 class ModelEvaluator:
     """
-    Comprehensive evaluation framework for machine learning models.
+    Makine öğrenmesi modelleri için kapsamlı değerlendirme çerçevesi.
     
-    Features:
-    - Multiple evaluation metrics
-    - Cross-validation evaluation
-    - Statistical significance testing
-    - Academic-style visualizations
-    - Comprehensive reporting
+    Özellikler:
+    - Çoklu değerlendirme metrikleri
+    - Çapraz doğrulama değerlendirmesi
+    - İstatistiksel anlamlılık testi
+    - Akademik tarz görselleştirmeler
+    - Kapsamlı raporlama
     """
     
     def __init__(self, random_state=42):
         """
-        Initialize the model evaluator.
+        Model değerlendiricisini başlat.
         
-        Parameters:
+        Parametreler:
         -----------
         random_state : int, default=42
-            Random seed for reproducibility
+            Tekrarlanabilirlik için rastgele tohum
         """
         self.random_state = random_state
         self.results = {}
@@ -51,27 +51,27 @@ class ModelEvaluator:
     def evaluate_single_model(self, model, model_name, X_test, y_test, 
                             y_pred=None, y_pred_proba=None):
         """
-        Evaluate a single model with comprehensive metrics.
+        Kapsamlı metriklerle tek bir modeli değerlendir.
         
-        Parameters:
+        Parametreler:
         -----------
         model : sklearn estimator
-            Trained model
+            Eğitilmiş model
         model_name : str
-            Name of the model
+            Modelin adı
         X_test : array-like
-            Test features
+            Test özellikleri
         y_test : array-like
-            True labels
+            Gerçek etiketler
         y_pred : array-like, optional
-            Predictions (will be computed if not provided)
+            Tahminler (sağlanmazsa hesaplanacak)
         y_pred_proba : array-like, optional
-            Prediction probabilities (will be computed if not provided)
+            Tahmin olasılıkları (sağlanmazsa hesaplanacak)
             
-        Returns:
+        Döndürür:
         --------
         metrics : dict
-            Dictionary of evaluation metrics
+            Değerlendirme metriklerinin sözlüğü
         """
         if y_pred is None:
             y_pred = model.predict(X_test)
@@ -82,7 +82,7 @@ class ModelEvaluator:
             except:
                 y_pred_proba = None
         
-        # Convert string labels to numeric for metric calculations
+        # Metrik hesaplamaları için string etiketleri sayısal değere dönüştür
         if hasattr(y_test, 'dtype') and y_test.dtype == 'object':
             y_test_encoded = pd.Categorical(y_test).codes
             y_pred_encoded = pd.Categorical(y_pred, categories=pd.Categorical(y_test).categories).codes
@@ -90,7 +90,7 @@ class ModelEvaluator:
             y_test_encoded = y_test
             y_pred_encoded = y_pred
         
-        # Calculate metrics
+        # Metrikleri hesapla
         metrics = {
             'model_name': model_name,
             'accuracy': accuracy_score(y_test_encoded, y_pred_encoded),
@@ -101,17 +101,17 @@ class ModelEvaluator:
             'mcc': matthews_corrcoef(y_test_encoded, y_pred_encoded)
         }
         
-        # Add AUC-ROC if probabilities are available
+        # Olasılıklar mevcut ise AUC-ROC ekle
         if y_pred_proba is not None:
             try:
                 if len(np.unique(y_test_encoded)) == 2:
-                    # Binary classification
+                    # İkili sınıflandırma
                     if y_pred_proba.shape[1] == 2:
                         auc_score = roc_auc_score(y_test_encoded, y_pred_proba[:, 1])
                     else:
                         auc_score = roc_auc_score(y_test_encoded, y_pred_proba)
                 else:
-                    # Multi-class classification
+                    # Çok sınıflı sınıflandırma
                     auc_score = roc_auc_score(y_test_encoded, y_pred_proba, 
                                             multi_class='ovr', average='weighted')
                 metrics['auc_roc'] = auc_score
@@ -120,7 +120,7 @@ class ModelEvaluator:
         else:
             metrics['auc_roc'] = np.nan
         
-        # Store results
+        # Sonuçları sakla
         self.results[model_name] = metrics
         
         return metrics
@@ -129,31 +129,31 @@ class ModelEvaluator:
                            scoring=['accuracy', 'precision_weighted', 'recall_weighted', 
                                    'f1_weighted', 'roc_auc']):
         """
-        Perform cross-validation evaluation of a model.
+        Bir modelin çapraz doğrulama değerlendirmesini gerçekleştir.
         
-        Parameters:
+        Parametreler:
         -----------
         model : sklearn estimator
-            Model to evaluate
+            Değerlendirilecek model
         model_name : str
-            Name of the model
+            Modelin adı
         X : array-like
-            Features
+            Özellikler
         y : array-like
-            Labels
+            Etiketler
         cv : int, default=5
-            Number of cross-validation folds
+            Çapraz doğrulama kat sayısı
         scoring : list, default=['accuracy', 'precision_weighted', 'recall_weighted', 'f1_weighted', 'roc_auc']
-            Scoring metrics
+            Puanlama metrikleri
             
-        Returns:
+        Döndürür:
         --------
         cv_scores : dict
-            Cross-validation scores for each metric
+            Her metrik için çapraz doğrulama puanları
         """
-        print(f"Cross-validating {model_name}...")
+        print(f"{model_name} çapraz doğrulaması yapılıyor...")
         
-        # Convert string labels to numeric if necessary
+        # Gerekirse string etiketleri sayısal değere dönüştür
         if hasattr(y, 'dtype') and y.dtype == 'object':
             y_encoded = pd.Categorical(y).codes
         else:
@@ -174,7 +174,7 @@ class ModelEvaluator:
                     'max': np.max(scores)
                 }
             except Exception as e:
-                print(f"Warning: Could not compute {metric} for {model_name}: {e}")
+                print(f"Uyarı: {model_name} için {metric} hesaplanamadı: {e}")
                 cv_scores[metric] = {
                     'scores': np.array([np.nan] * cv),
                     'mean': np.nan,
@@ -190,54 +190,54 @@ class ModelEvaluator:
     def evaluate_all_models(self, models_dict, X_test, y_test, X_train=None, y_train=None,
                           perform_cv=True):
         """
-        Evaluate all models comprehensively.
+        Tüm modelleri kapsamlı bir şekilde değerlendir.
         
-        Parameters:
+        Parametreler:
         -----------
         models_dict : dict
-            Dictionary of trained models
+            Eğitilmiş modellerin sözlüğü
         X_test : array-like
-            Test features
+            Test özellikleri
         y_test : array-like
-            Test labels
+            Test etiketleri
         X_train : array-like, optional
-            Training features (for cross-validation)
+            Eğitim özellikleri (çapraz doğrulama için)
         y_train : array-like, optional
-            Training labels (for cross-validation)
+            Eğitim etiketleri (çapraz doğrulama için)
         perform_cv : bool, default=True
-            Whether to perform cross-validation
+            Çapraz doğrulama yapılıp yapılmayacağı
             
-        Returns:
+        Döndürür:
         --------
         evaluation_results : dict
-            Comprehensive evaluation results
+            Kapsamlı değerlendirme sonuçları
         """
-        print("Evaluating all models...")
+        print("Tüm modeller değerlendiriliyor...")
         print("=" * 50)
         
         for model_name, model in models_dict.items():
-            print(f"Evaluating {model_name}...")
+            print(f"{model_name} değerlendiriliyor...")
             
-            # Single evaluation on test set
+            # Test kümesi üzerinde tek değerlendirme
             try:
                 self.evaluate_single_model(model, model_name, X_test, y_test)
-                print(f"✓ Test evaluation completed for {model_name}")
+                print(f"✓ {model_name} için test değerlendirmesi tamamlandı")
             except Exception as e:
-                print(f"✗ Error in test evaluation for {model_name}: {e}")
+                print(f"✗ {model_name} için test değerlendirmesinde hata: {e}")
                 continue
             
-            # Cross-validation if training data is provided
+            # Eğitim verisi sağlanmışsa çapraz doğrulama
             if perform_cv and X_train is not None and y_train is not None:
                 try:
                     self.cross_validate_model(model, model_name, X_train, y_train)
-                    print(f"✓ Cross-validation completed for {model_name}")
+                    print(f"✓ {model_name} için çapraz doğrulama tamamlandı")
                 except Exception as e:
-                    print(f"✗ Error in cross-validation for {model_name}: {e}")
+                    print(f"✗ {model_name} için çapraz doğrulamada hata: {e}")
         
         print("=" * 50)
-        print(f"Evaluation completed for {len(self.results)} models")
+        print(f"{len(self.results)} model için değerlendirme tamamlandı")
         
-        # Compile results
+        # Sonuçları derle
         evaluation_results = {
             'test_results': self.results,
             'cv_results': self.cv_results,
@@ -248,27 +248,27 @@ class ModelEvaluator:
     
     def perform_statistical_tests(self, alpha=0.05):
         """
-        Perform statistical significance tests for model comparison.
+        Model karşılaştırması için istatistiksel anlamlılık testleri gerçekleştir.
         
-        Parameters:
+        Parametreler:
         -----------
         alpha : float, default=0.05
-            Significance level
+            Anlamlılık seviyesi
             
-        Returns:
+        Döndürür:
         --------
         statistical_results : dict
-            Results of statistical tests
+            İstatistiksel testlerin sonuçları
         """
-        print("Performing statistical significance tests...")
+        print("İstatistiksel anlamlılık testleri gerçekleştiriliyor...")
         
         if len(self.cv_results) < 2:
-            print("Warning: Need at least 2 models for statistical testing")
+            print("Uyarı: İstatistiksel test için en az 2 model gerekli")
             return {}
         
         statistical_results = {}
         
-        # Friedman test for multiple model comparison
+        # Çoklu model karşılaştırması için Friedman testi
         metrics = ['accuracy', 'precision_weighted', 'recall_weighted', 'f1_weighted']
         
         for metric in metrics:
@@ -282,7 +282,7 @@ class ModelEvaluator:
                         scores_matrix.append(scores)
                         model_names.append(model_name)
                 
-                if len(scores_matrix) >= 3:  # Friedman test needs at least 3 groups
+                if len(scores_matrix) >= 3:  # Friedman testi en az 3 grup gerektirir
                     try:
                         statistic, p_value = friedmanchisquare(*scores_matrix)
                         
@@ -290,16 +290,16 @@ class ModelEvaluator:
                             'statistic': statistic,
                             'p_value': p_value,
                             'significant': p_value < alpha,
-                            'interpretation': 'Significant differences between models' if p_value < alpha else 'No significant differences',
+                            'interpretation': 'Modeller arasında anlamlı farklılıklar' if p_value < alpha else 'Anlamlı farklılık yok',
                             'models_compared': model_names
                         }
                         
-                        # If significant, perform post-hoc ranking
+                        # Anlamlı ise, post-hoc sıralama yap
                         if p_value < alpha:
-                            # Calculate average ranks
+                            # Ortalama sıraları hesapla
                             ranks = []
                             for scores in scores_matrix:
-                                ranks.append(rankdata(-scores))  # Negative for descending order
+                                ranks.append(rankdata(-scores))  # Azalan sıra için negatif
                             
                             avg_ranks = np.mean(ranks, axis=1)
                             rank_df = pd.DataFrame({
@@ -310,9 +310,9 @@ class ModelEvaluator:
                             statistical_results[f'ranking_{metric}'] = rank_df
                             
                     except Exception as e:
-                        print(f"Error performing Friedman test for {metric}: {e}")
+                        print(f"{metric} için Friedman testi gerçekleştirilirken hata: {e}")
         
-        # Pairwise t-tests for top models
+        # En iyi modeller için ikili t-testleri
         if len(self.cv_results) >= 2:
             model_names = list(self.cv_results.keys())
             
@@ -338,7 +338,7 @@ class ModelEvaluator:
                                         'better_model': model1 if np.mean(scores1) > np.mean(scores2) else model2
                                     }
                                 except Exception as e:
-                                    print(f"Error in t-test {model1} vs {model2}: {e}")
+                                    print(f"{model1} vs {model2} t-testinde hata: {e}")
                 
                 if pairwise_results:
                     statistical_results[f'pairwise_tests_{metric}'] = pairwise_results
@@ -349,12 +349,12 @@ class ModelEvaluator:
     
     def create_results_summary(self):
         """
-        Create a comprehensive summary of evaluation results.
+        Değerlendirme sonuçlarının kapsamlı bir özetini oluştur.
         
-        Returns:
+        Döndürür:
         --------
         summary : dict
-            Summary of all evaluation results
+            Tüm değerlendirme sonuçlarının özeti
         """
         summary = {
             'model_count': len(self.results),
@@ -367,7 +367,7 @@ class ModelEvaluator:
         if not self.results:
             return summary
         
-        # Find best models for each metric
+        # Her metrik için en iyi modelleri bul
         metrics = ['accuracy', 'balanced_accuracy', 'precision', 'recall', 'f1_score', 'auc_roc', 'mcc']
         
         for metric in metrics:
@@ -386,11 +386,11 @@ class ModelEvaluator:
                     'score': best_score
                 }
         
-        # Performance summary table
+        # Performans özet tablosu
         performance_df = pd.DataFrame(self.results).T
         summary['performance_summary'] = performance_df.describe()
         
-        # CV summary if available
+        # Mevcut ise çapraz doğrulama özeti
         if self.cv_results:
             cv_summary = {}
             for model_name, cv_data in self.cv_results.items():
@@ -405,22 +405,22 @@ class ModelEvaluator:
     
     def save_results(self, save_path):
         """
-        Save all evaluation results to files.
+        Tüm değerlendirme sonuçlarını dosyalara kaydet.
         
-        Parameters:
+        Parametreler:
         -----------
         save_path : str
-            Directory to save results
+            Sonuçları kaydetmek için dizin
         """
         import os
         os.makedirs(save_path, exist_ok=True)
         
-        # Save test results
+        # Test sonuçlarını kaydet
         if self.results:
             results_df = pd.DataFrame(self.results).T
             results_df.to_csv(f"{save_path}/test_results.csv")
         
-        # Save CV results
+        # Çapraz doğrulama sonuçlarını kaydet
         if self.cv_results:
             cv_means = {}
             cv_stds = {}
@@ -437,11 +437,11 @@ class ModelEvaluator:
             cv_means_df.to_csv(f"{save_path}/cv_results_means.csv")
             cv_stds_df.to_csv(f"{save_path}/cv_results_stds.csv")
         
-        # Save statistical tests
+        # İstatistiksel testleri kaydet
         if self.statistical_tests:
             import json
             
-            # Convert numpy types for JSON serialization
+            # JSON serileştirme için numpy tiplerini dönüştür
             def convert_numpy(obj):
                 if isinstance(obj, np.integer):
                     return int(obj)
@@ -469,61 +469,61 @@ class ModelEvaluator:
             with open(f"{save_path}/statistical_tests.json", 'w') as f:
                 json.dump(serializable_tests, f, indent=2)
         
-        print(f"Results saved to {save_path}")
+        print(f"Sonuçlar {save_path} konumuna kaydedildi")
 
 def evaluate_model_performance(models_dict, X_train, y_train, X_test, y_test, 
                              save_path=None, perform_statistical_tests=True):
     """
-    Complete evaluation pipeline for model comparison.
+    Model karşılaştırması için tam değerlendirme hattı.
     
-    Parameters:
+    Parametreler:
     -----------
     models_dict : dict
-        Dictionary of trained models
+        Eğitilmiş modellerin sözlüğü
     X_train : array-like
-        Training features
+        Eğitim özellikleri
     y_train : array-like
-        Training labels
+        Eğitim etiketleri
     X_test : array-like
-        Test features
+        Test özellikleri
     y_test : array-like
-        Test labels
+        Test etiketleri
     save_path : str, optional
-        Path to save results
+        Sonuçları kaydetmek için yol
     perform_statistical_tests : bool, default=True
-        Whether to perform statistical significance tests
+        İstatistiksel anlamlılık testlerinin yapılıp yapılmayacağı
         
-    Returns:
+    Döndürür:
     --------
     evaluation_results : dict
-        Comprehensive evaluation results
+        Kapsamlı değerlendirme sonuçları
     """
-    print("Starting comprehensive model evaluation...")
+    print("Kapsamlı model değerlendirmesi başlatılıyor...")
     
-    # Initialize evaluator
+    # Değerlendiricyi başlat
     evaluator = ModelEvaluator()
     
-    # Evaluate all models
+    # Tüm modelleri değerlendir
     results = evaluator.evaluate_all_models(
         models_dict, X_test, y_test, X_train, y_train
     )
     
-    # Perform statistical tests
+    # İstatistiksel testleri gerçekleştir
     if perform_statistical_tests:
         evaluator.perform_statistical_tests()
     
-    # Create summary
+    # Özet oluştur
     summary = evaluator.create_results_summary()
     results['summary'] = summary
     
-    # Save results if path provided
+    # Yol sağlanmışsa sonuçları kaydet
     if save_path:
         evaluator.save_results(save_path)
     
-    print("Model evaluation completed!")
+    print("Model değerlendirmesi tamamlandı!")
     
     return results
 
 if __name__ == "__main__":
-    print("Evaluation framework ready!")
-    print("Use evaluate_model_performance() to evaluate your models.")
+    print("Değerlendirme çerçevesi hazır!")
+    print("Modellerinizi değerlendirmek için evaluate_model_performance() kullanın.")
